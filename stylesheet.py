@@ -3,7 +3,11 @@ StyleSheet = """
         font-family: LeagueGothic-CondensedRegular;
         src: url(/Users/sora/Development/Python/Tutorial/RPGOverlay/LeagueGothic-Regular.otf);
     }
-    #menu_button {
+    #panel {
+        background-color: white;
+        border-radius: 5px; 
+    }
+    QPushButton#menu_button {
         background-color: #acacbf;
         border-radius: 5px; 
         height: 34px;
@@ -40,5 +44,11 @@ StyleSheet = """
     
     QSlider {
         transition: .4s;
+    }
+    
+    QPushButton#back_button {
+        border: 1px solid black;
+        height: 36px;
+        width: 36px;
     }
 """

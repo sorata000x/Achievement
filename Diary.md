@@ -1,3 +1,43 @@
+08/30/22
+
+It is important to plan what to do and record how much I have done
+and the problems I encountered and solved for future reference so I will 
+start doing it from now on.
+Stuff To Do Today:
+   - Draw Icons
+   - Add create new achievement page
+Stuff Done Today:
+   - Draw trophy icon for achievement, might change to star o6r star medal.
+   - Have a slide in page for creating new achievement interface
+Problems solved today:
+   - I had trouble setting layout that contains buttons onto the panel
+widget because the background buttons disappears, but it appears to be
+because of panel's stylesheet is inline which makes it later than the
+button's style sheet being set from stylesheet file. So I changed panel's
+stylesheet to read from the file and it worked.
+
+I probably should stop when I feel bad to continue doing something, especially
+those things that I actually like myself to do because I don't want to feel 
+stressed doing them.
+
+I also need to commit more frequently.
+
+08/28/22
+
+Two days ago I fixed the display of the app window, and added some buttons for the utilities along with
+some temporary image to represent each utilities which will be replaced by the proper one I will need to 
+draw later. The next thing to that is to change the font, and it spent me two days to figure out how to
+do it. The first thing I tried is to use stylesheet, which I beilieve is CSS, so I tried it, after fixing
+some error I still could not see the font change. I then do research again to find out I need to add
+the file to QFontDatabase, so I did that, no luck again. It ended up I was on the right track, and I just
+needed to use absolute path instead of the relative one (which seems to be macOS specific problem and I 
+still don't know why). I will need to develop in different platform (Windows, Linux) as well to avoid these
+sorts of problems. Now I changed the font and next thing I want to do is to draw the icons and make the menu
+looks better. As a leader I have to know more than my team members do (although I don't have one yet), and 
+work way harder.
+Fixed some layout and added a toggle for Experience, took quit a long time on that but it looks pretty good.
+Gotta draw the icons tomorrow.
+
 08/24/22
 
 After working on experience bar and objective display (or quest helper), and I also want to work on other 
@@ -25,19 +65,3 @@ There were some confusion for the timing of tray updating its position, it gave 
 but it comes out that the correct position updates after it emits the activated signal, so the problem is 
 solved since the reason was found. I still need to make some adjustments to the window and then I can start
 working on the interface, but this is it for today.
-
-08/28/22
-
-Two days ago I fixed the display of the app window, and added some buttons for the utilities along with
-some temporary image to represent each utilities which will be replaced by the proper one I will need to 
-draw later. The next thing to that is to change the font, and it spent me two days to figure out how to
-do it. The first thing I tried is to use stylesheet, which I beilieve is CSS, so I tried it, after fixing
-some error I still could not see the font change. I then do research again to find out I need to add
-the file to QFontDatabase, so I did that, no luck again. It ended up I was on the right track, and I just
-needed to use absolute path instead of the relative one (which seems to be macOS specific problem and I 
-still don't know why). I will need to develop in different platform (Windows, Linux) as well to avoid these
-sorts of problems. Now I changed the font and next thing I want to do is to draw the icons and make the menu
-looks better. As a leader I have to know more than my team members do (although I don't have one yet), and 
-work way harder.
-Fixed some layout and added a toggle for Experience, took quit a long time on that but it looks pretty good.
-Gotta draw the icons tomorrow.
