@@ -22,7 +22,7 @@ StyleSheet = """
         border: 2px solid #d8d8e3;
         color: #acacbf;
         border-radius: 5px; 
-        height: 34px;
+        height: 31px;
         font-size: 20pt;
         text-align: center;
         padding: 8px;
@@ -50,5 +50,14 @@ StyleSheet = """
         border: 1px solid black;
         height: 36px;
         width: 36px;
+    }
+    
+    QScrollArea {
+        background-color: white;
+        border: 0;
+    }
+    
+    #white-background {
+        background-color: white;
     }
 """

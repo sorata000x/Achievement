@@ -1,3 +1,13 @@
+08/31/22
+
+I probably should start to think about how to package the code to be the real app.
+
+Stuff Done Today:
+- Add setting and user button at the end of menus to have better measure of the
+size of the menus.
+- Rework achievement menu: add scroll area for achievement buttons
+- Add achievement page skeleton
+
 08/30/22
 
 It is important to plan what to do and record how much I have done
