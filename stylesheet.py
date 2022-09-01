@@ -35,8 +35,8 @@ StyleSheet = """
         border-radius: 2px;
     }
     
-    QSlider::groove:horizontal {
-        background-color: #6b6b6b;
+    QSlider::groove:horizontal#current_achievement_button_progress_slider {
+        background-color: black;
         height: 19px;
         width: 36px;
         border-radius: 2px;
@@ -59,5 +59,42 @@ StyleSheet = """
     
     #white-background {
         background-color: white;
+    }
+    
+    QPushButton#current_achievement_button {
+        background-color: black;
+        border-radius: 5px; 
+        height: 34px;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    #current_achievement_button_title {
+        color: white;
+        font-size: 18pt;
+    }
+    
+    #current_achievement_button_summary {
+        color: white;
+        font-size: 13pt;
+    }
+    
+    #progress {
+        text-align: center;
+        border: 0;
+        background-color: black;
+        height: 50px;
+        width: 226px;
+        border-radius: 5px;
+    }
+    #progress::chunk {
+        background-color: blue;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    
+    #icon {
+        background-color: black;
+        border: 0;
     }
 """

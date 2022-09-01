@@ -3,19 +3,12 @@
     Current:
         - Icon tray & menu with utilities buttons and achievement menu
     To Do:
-
-        - Add entries of create achievement page and button to add created achievement to menu.
-        - Draw icons
-            - Back button Icon
-            - Skill Tree Icon
-            - Experience Icon
-            - Quest Icon
         - Button hover effect
 """
 
 import sys
 import os
-from PyQt6.QtCore import Qt, QSize, QDir, QPropertyAnimation, QPoint, QEasingCurve
+from PyQt6.QtCore import Qt, QSize, QDir, QPropertyAnimation, QPoint, QEasingCurve, pyqtSignal
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 from stylesheet import StyleSheet
@@ -171,6 +164,8 @@ class AchievementMenuWindow(QWidget):
         self.setWindowFlags(self.windowFlags() | Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)  # set background transparent
         self.resize(250, 298)
+        # Property
+        #self.is_create_new_page_shown = False
         # Main Menu
         # -- Panel
         self.panel = QWidget(self)
@@ -213,9 +208,18 @@ class AchievementMenuWindow(QWidget):
         # ------ Layout
         self.created_achievement_buttons_layout = QVBoxLayout()
         self.created_achievement_buttons_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.created_achievement_buttons_layout.setContentsMargins(0, 53, 0, 4)
-        self.created_achievement_buttons_layout.setSpacing(3)
+        self.created_achievement_buttons_layout.setContentsMargins(0, 57, 0, 65)
+        self.created_achievement_buttons_layout.setSpacing(15)
         self.created_achievement_buttons_widget.setLayout(self.created_achievement_buttons_layout)
+
+        self.stack_layout.addWidget(self.scroll_area_widget)
+        self.panel.setLayout(self.stack_layout)
+
+        self.current_achievement_buttons = [
+
+        ]
+
+        """
         # ------ TESTING
         self.buffer_buttons = [
             MenuButtonWidget("Achievement 1"),
@@ -227,8 +231,9 @@ class AchievementMenuWindow(QWidget):
         for b in self.buffer_buttons:
             self.created_achievement_buttons_layout.addWidget(b)
 
-        self.stack_layout.addWidget(self.scroll_area_widget)
-        self.panel.setLayout(self.stack_layout)
+        self.test_button = MenuButtonWidget("Achievement Test")
+        """
+
 
         # Create-New Page
         # -- Panel
@@ -240,47 +245,150 @@ class AchievementMenuWindow(QWidget):
         self.sliding_page_anim = QPropertyAnimation(self.panel_2, b"pos")
         self.sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
         # -- Back Button
-        self.back_button = QPushButton(self.panel_2)
-        self.back_button.clicked.connect(self.sliding_page_out)
-        self.back_button.setObjectName("back_button")
+        #self.back_button = QPushButton(self.panel_2)
+        #self.back_button.clicked.connect(self.sliding_page_out)
+        #self.back_button.setObjectName("back_button")
         # -- Image Upload Button
         self.image_upload_button = QToolButton(self.panel_2)
         self.image_upload_button.setIcon(QIcon("trophy_icon.png"))
         self.image_upload_button.setIconSize(QSize(60, 60))
-        self.image_upload_button.move(10, 50)
+        self.image_upload_button.move(10, 10)
         # -- Title Entry
-        self.title_label = QLabel("Title", self.panel_2)
-        self.title_label.move(92, 64)
+        self.title_label = QLabel("TITLE", self.panel_2)
+        self.title_label.move(92, 38)
         self.title_entry = QLineEdit(self.panel_2)
-        self.title_entry.move(92, 82)
+        self.title_entry.move(92, 56)
+        self.title_entry.resize(144, 24)
+        self.title_entry.setStyleSheet("""
+            background-color: #2b2b2b; 
+            border: 0; border-radius: 2px; 
+            padding: 2px; 
+            color: white;
+            """)
         # -- Summary Entry
-        self.summary_label = QLabel("Summary", self.panel_2)
-        self.summary_label.move(14, 130)
+        self.summary_label = QLabel("SUMMARY", self.panel_2)
+        self.summary_label.move(10, 90)
         self.summary_entry = QLineEdit(self.panel_2)
-        self.summary_entry.resize(222, 20)
-        self.summary_entry.move(14, 150)
+        self.summary_entry.move(10, 108)
+        self.summary_entry.setStyleSheet("""
+            background-color: #2b2b2b; 
+            border: 0; border-radius: 2px; 
+            padding: 2px; 
+            color: white;
+            height: 20px;
+            width: 222px;
+            """)
         # -- Description Entry
-        self.description_label = QLabel("Description", self.panel_2)
-        self.description_label.move(14, 180)
-        self.description_entry = QLineEdit(self.panel_2)
-        self.description_entry.resize(222, 50)
-        self.description_entry.move(14, 200)
-        # -- OK Button
-        self.ok_button = QPushButton("OK", self.panel_2)
-        self.ok_button.move(100, 260)
+        self.description_label = QLabel("DESCRIPTION", self.panel_2)
+        self.description_label.move(10, 140)
+        self.description_entry = QPlainTextEdit(self.panel_2)
+        self.description_entry.move(10, 158)
+        self.description_entry.resize(226, 96)
+        self.description_entry.setStyleSheet("""
+            background-color: #2b2b2b; 
+            border: 0; border-radius: 2px; 
+            padding: 2px; 
+            color: white;
+            """)
+        self.description_entry.setTabStopDistance(
+            QFontMetricsF(self.description_entry.font()).horizontalAdvance(' ') * 4)
         # -- Cancel Button
         self.cancel_button = QPushButton("Cancel", self.panel_2)
-        self.cancel_button.move(170, 260)
+        self.cancel_button.resize(66, 24)
+        self.cancel_button.move(94, 264)
+        self.cancel_button.clicked.connect(self.sliding_page_out)
+        self.cancel_button.setStyleSheet("""
+            background-color: #636363;
+            border-radius: 2px;
+            color: white;
+        """)
+        # -- OK Button
+        self.ok_button = QPushButton("OK", self.panel_2)
+        self.ok_button.resize(66, 24)
+        self.ok_button.move(170, 264)
+        self.ok_button.clicked.connect(self.create_new_achievement)
+        self.ok_button.setStyleSheet("""
+            background-color: #198cff;
+            border-radius: 2px;
+            color: white;
+        """)
+
+        # TEST
+        #self.current_achievement_buttons.append(self.CurrentAchievementButton("Title", "Summary"))
+        self.created_achievement_buttons_layout.addWidget(self.CurrentAchievementButton("Title", "A bit longer summary"))
+
+    def keyPressEvent(self, event):
+        super().keyPressEvent(event)
+        #self.keyPressed.emit(event.key())
+        if event.key() == Qt.Key.Key_Return:
+            self.create_new_achievement()
 
     def sliding_page_in(self):
         self.sliding_page_anim.setDuration(300)
         self.sliding_page_anim.setEndValue(QPoint(0, 0))
         self.sliding_page_anim.start()
+        #self.is_create_new_page_shown = True
 
     def sliding_page_out(self):
         self.sliding_page_anim.setDuration(100)
         self.sliding_page_anim.setEndValue(QPoint(self.width(), 0))
         self.sliding_page_anim.start()
+
+    def create_new_achievement(self):
+        new_achievement_button = self.CurrentAchievementButton(self.title_entry.text(), self.summary_entry.text())
+        self.current_achievement_buttons.append(new_achievement_button)
+        self.created_achievement_buttons_layout.addWidget(new_achievement_button)
+        self.sliding_page_out()
+
+    class CurrentAchievementButton(QPushButton):
+        def __init__(self, title, summary, parent=None):
+            super().__init__(parent)
+            # Config
+            self.setObjectName("current_achievement_button")
+            # Progress
+            self.progress_bar = self.ProgressBar(self)
+            self.progress_bar.setValue(100)
+            # Title
+            self.title = QLabel(title, self)
+            self.title.setObjectName("current_achievement_button_title")
+            self.title.move(48, 6)
+            # Icon
+            self.icon = QToolButton(self)
+            self.icon.setIcon(QIcon("trophy_icon.png"))
+            self.icon.setObjectName("icon")
+            self.icon.setIconSize(QSize(30, 30))
+            self.icon.resize(36, 36)
+            self.icon.move(6, 7)
+            # Summary
+            self.summary = QLabel(summary, self)
+            self.summary.setObjectName("current_achievement_button_summary")
+            self.summary.move(48, 28)
+
+        class ProgressBar(QProgressBar):
+            def __init__(self, parent=None):
+                super().__init__(parent)
+                self.setObjectName("progress")
+                self.setFormat('')
+                self.move(0, 0)
+                self.setMinimum(0)
+                self.setMaximum(100)
+
+            def setValue(self, p_int):
+                super().setValue(p_int)
+                if p_int > self.maximum() * (99/100):
+                    self.setStyleSheet("""
+                        #progress::chunk {
+                            background-color: blue;
+                            border-radius: 5px;
+                        }""")
+                else:
+                    self.setStyleSheet("""
+                        #progress::chunk {
+                            background-color: blue;
+                            border-top-left-radius: 5px;
+                            border-bottom-left-radius: 5px;
+                        }""")
+
 
 class MenuButtonWidget(QPushButton):
     def __init__(self, title="", parent=None, has_toggle=False):

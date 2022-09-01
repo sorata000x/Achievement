@@ -1,3 +1,25 @@
+09/01/22
+
+Objective: Completion of Achievement pages implementation.
+Task:
+   - Windows behavior: 
+     - close when tap outside.
+     - toggle window with button.
+   - Improve create new achievement page appearance.
+   - Create achievement button class to show title, summary, and progress.
+   - Create achievement info page when current achievement button clicked.
+     - edit button
+     - delete button
+     - modify progress function
+     - complete button
+   - Create all achievement page
+   
+Just an idea for other part of the program, I can let the user turn on
+or off the utilities they don't want and change the theme to light, system, and dark.
+
+Question:
+   - Do I need setting buttons for achievement page?
+
 08/31/22
 
 I probably should start to think about how to package the code to be the real app.
@@ -7,6 +29,10 @@ Stuff Done Today:
 size of the menus.
 - Rework achievement menu: add scroll area for achievement buttons
 - Add achievement page skeleton
+
+I think it is good timing to set a road mark for this project.
+I would say completion of achievement pages and functions would be a good one.
+I will rule out exactly what to do to achieve it tomorrow.
 
 08/30/22
 
