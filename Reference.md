@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/7421699/close-widget-window-if-mouse-clicked
 PyQt5 Tutorial: System tray & Mac menu bar applications |
 https://www.pythonguis.com/tutorials/system-tray-mac-menu-bar-applications-pyqt/
 
-Geeksforgeeks: How to include a font .ttf using CSS ? |
+GeeksforGeeks: How to include a font .ttf using CSS ? |
 https://www.geeksforgeeks.org/how-to-include-a-font-ttf-using-css/
 
 CodersLegacy: PyQt6 – Adding Custom Fonts | 
@@ -45,4 +45,20 @@ https://www.pythonguis.com/tutorials/qpropertyanimation/
 Qt: QStackedWidget | 
 https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QStackedWidget.currentChanged
 
+Python GUIs: Add scrollable regions with QScrollArea |
+https://www.pythonguis.com/tutorials/qscrollarea/
 
+GeeksforGeeks: How to specify no border in CSS ? |
+https://www.geeksforgeeks.org/how-to-specify-no-border-in-css/
+
+StackOverflow: PyQt Connect to KeyPressEvent |
+https://stackoverflow.com/questions/27475940/pyqt-connect-to-keypressevent
+
+Learn Python PyQt: PyQt progressbar |
+https://pythonpyqt.com/pyqt-progressbar/
+
+FAQCode4u: How To Change The Width Of Tabs In A Qplaintextedit | 
+https://www.faqcode4u.com/faq/122502/how-to-change-the-width-of-tabs-in-a-qplaintextedit
+
+Dave Smith's Blog: Fancy QSlider Stylesheet |
+https://thesmithfam.org/blog/2010/03/10/fancy-qslider-stylesheet/

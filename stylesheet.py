@@ -28,23 +28,14 @@ StyleSheet = """
         padding: 8px;
     }
     
-    QSlider::handle:horizontal {
-        background-color: white;
-        height: 19px;
-        width: 18px;
-        border-radius: 2px;
-    }
     
-    QSlider::groove:horizontal#current_achievement_button_progress_slider {
+    #current_achievement_button_progress_slider::groove:horizontal {
         background-color: black;
         height: 19px;
         width: 36px;
         border-radius: 2px;
     }
-    
-    QSlider {
-        transition: .4s;
-    }
+
     
     QPushButton#back_button {
         border: 1px solid black;
@@ -97,4 +88,31 @@ StyleSheet = """
         background-color: black;
         border: 0;
     }
+    
+    #current_achievement_info_page {
+        background-color: white;
+        border-radius: 5px; 
+        padding: 8px;
+    }
+    
+    
+    
+    #info_progress::groove:horizontal {
+        background-color: black;
+        height: 18px;
+    }
+    
+    #info_progress::handle:horizontal {
+        background-color: green;
+        width: 3px;
+        border-radius: 0px;
+        margin: -2px 0px;
+    }
+    
+    #info_progress::sub-page:horizontal {
+        background-color: blue;
+    }
+    
+    
+    
 """

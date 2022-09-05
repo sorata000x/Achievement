@@ -1,3 +1,14 @@
+09/05/22
+
+Although I heard some people said the best practice is to commit one thing
+at a time, I found it hard to follow because almost every part of this program 
+are interconnected, and it is difficult to only do one part at the time. 
+I suppose it is better to just keep the standard in mind and do it in my own way.
+
+To Do: 
+    - Make sub window replace old window with animation stretch from top right,
+and hide the old window.
+
 09/01/22
 
 Objective: Completion of Achievement pages implementation.
