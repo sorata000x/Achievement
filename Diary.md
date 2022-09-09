@@ -1,3 +1,13 @@
+09/08/22
+
+Doing Today:
+ - Put classes and functions in separate files and make it work.
+
+09/07/22
+
+The program is becoming increasingly hard to manage, maybe I should separate 
+classes and functions to different files.
+
 09/05/22
 
 Although I heard some people said the best practice is to commit one thing
