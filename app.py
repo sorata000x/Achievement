@@ -2,32 +2,37 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QApplication, QSystemTrayIcon
 
 from stylesheet import StyleSheet
-from windows.main_menu_window import MainMenuWindow
+from main_menu_window.main_menu_window import MainWindow
 
 
 class Application(QApplication):
     def __init__(self, argv):
         super(Application, self).__init__(argv)
+        # Window Config
         self.setQuitOnLastWindowClosed(False)
         self.setStyleSheet(StyleSheet)
-
+        # Sub Windows
+        self.main_menu = MainWindow(self)
         # Create the Tray
-        self.tray = QSystemTrayIcon()
-        self.tray.setIcon(QIcon("images/icon.jpg"))
-        self.tray.setVisible(True)
+        self.tray = SystemTrayIcon()
+        self.tray.activated.connect(lambda _: self.tray.toggle_window(self.main_menu))
 
-        def toggle_menu():
-            """
-            Show menu window when it is hidden, otherwise hide the window.
-            :return:
-            """
-            if main_menu.isHidden():
-                main_menu.move(self.tray.geometry().bottomLeft().x(), self.tray.geometry().bottomLeft().y() + 5)
-                main_menu.show()
-            else:
-                main_menu.hide()
-            return
+class SystemTrayIcon(QSystemTrayIcon):
+    def __init__(self):
+        super().__init__()
+        self.setIcon(QIcon("images/icon.jpg"))
+        self.setVisible(True)
 
-        self.tray.activated.connect(toggle_menu)
+    def toggle_window(self, window):
+        """
+        Show menu window when it is hidden, otherwise hide the window.
+        :return:
+        """
+        if window.isHidden():
+            window.move(self.geometry().bottomLeft().x(), self.geometry().bottomLeft().y() + 5)
+            window.show()
+        else:
+            window.hide()
+        return
 
-        main_menu = MainMenuWindow(self)
+

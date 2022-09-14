@@ -1,8 +1,4 @@
 StyleSheet = """
-    @font-face {
-        font-family: LeagueGothic-CondensedRegular;
-        src: url(/Users/sora/Development/Python/Tutorial/RPGOverlay/LeagueGothic-Regular.otf);
-    }
     #panel {
         background-color: white;
         border-radius: 5px; 
@@ -14,6 +10,12 @@ StyleSheet = """
         font-size: 46pt;
         text-align: left;
         padding: 8px;
+    }
+    QPushButton#menu_button:hover {
+        background-color: #8c8c9c;
+    }
+    QPushButton#menu_button:pressed {
+        background-color: #6f6f7d;
     }
     #menu_button_title {
         color: white;

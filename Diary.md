@@ -1,3 +1,21 @@
+09/10/22
+
+Today I will be working on the achievement collection page.
+
+Doing
+ - Add and implement back button for achievement collection page
+
+Done
+ - Put all achievement collections in a scroll area. 
+ - Connect achievement collection page to its button.
+
+Keep in mind to always type out the entire unfamiliar code for practicing instead 
+of simply copying or auto complete the code.
+I am contemplating whether to put every page in the main windows as a stack
+or to put each subpage under their parent pages. The advantage of the first
+is it is easier to see all the pages at once, but then it is hard to see the
+hierarchy of the pages.
+
 09/08/22
 
 Doing Today:

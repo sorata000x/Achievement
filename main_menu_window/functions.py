@@ -4,7 +4,8 @@ from PyQt6.QtGui import QFontDatabase, QFont
 
 
 def getFont(filename):
-    font_id = QFontDatabase.addApplicationFont(f"{os.path.dirname(__file__)}/fonts/{filename}")
+    font_id = QFontDatabase.addApplicationFont(f"/Users/sora/Development/RPG-Overlay/fonts/{filename}")
+    #font_id = QFontDatabase.addApplicationFont(f"{os.path.dirname(__file__)}/fonts/{filename}")
     try:
         if font_id > -1:
             font_name = QFontDatabase.applicationFontFamilies(font_id)[0]
