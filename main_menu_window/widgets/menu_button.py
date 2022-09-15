@@ -15,13 +15,14 @@ class MenuButtonWidget(QPushButton):
         self.title = QLabel(title, self)
         self.title.setFont(getFont('LeagueGothic-Regular.otf'))
         self.title.move(43, 6)
-        self.title.setObjectName("menu_button_title")
+        #self.title.setObjectName("menu_button_title")
+        self.title.setStyleSheet("color: #ffffff;")
         # --- icon
         self.setIcon(QIcon("images/trophy_icon.png"))
         self.setIconSize(QSize(28, 28))
         # --- toggle
         if has_toggle:
             self.toggle = ToggleWidget(self)
-            self.toggle.move(200, 13)
+            self.toggle.move(186, 13)
         # Effect
         self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))

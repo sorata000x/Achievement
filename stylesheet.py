@@ -1,10 +1,10 @@
 StyleSheet = """
     #panel {
-        background-color: white;
+        background-color: #34373b;
         border-radius: 5px; 
     }
     QPushButton#menu_button {
-        background-color: #acacbf;
+        background-color: #3f4a5e;
         border-radius: 5px; 
         height: 34px;
         font-size: 46pt;
@@ -17,10 +17,7 @@ StyleSheet = """
     QPushButton#menu_button:pressed {
         background-color: #6f6f7d;
     }
-    #menu_button_title {
-        color: white;
-    }
-    #create_new_button {
+    QPushButton#create_new_button {
         border: 2px solid #d8d8e3;
         color: #acacbf;
         border-radius: 5px; 
@@ -29,31 +26,40 @@ StyleSheet = """
         text-align: center;
         padding: 8px;
     }
-    
-    
-    #current_achievement_button_progress_slider::groove:horizontal {
+    QSlider#current_achievement_button_progress_slider::groove:horizontal {
         background-color: black;
         height: 19px;
         width: 36px;
         border-radius: 2px;
     }
-
-    
     QPushButton#back_button {
         border: 1px solid black;
         height: 36px;
         width: 36px;
     }
-    
     QScrollArea {
-        background-color: white;
+        background-color: #34373b;
         border: 0;
+        padding: 0;
     }
-    
+    QScrollBar {
+        background-color: #2f3236;
+        width: 14px;
+        border-radius: 2px;
+    }
+    QScrollBar::handle {
+        background-color: #1d1f21;
+        border: 7px solid transparent;
+        border-radius: 6px;
+        width: 6px;
+    }
+    QScrollBar::add-line, QScrollBar::sub-line {
+        border: none;
+        background: none;
+    }
     #white-background {
         background-color: white;
     }
-    
     QPushButton#current_achievement_button {
         background-color: black;
         border-radius: 5px; 
@@ -75,13 +81,14 @@ StyleSheet = """
     #progress {
         text-align: center;
         border: 0;
-        background-color: black;
-        height: 50px;
-        width: 226px;
+        background-color: #202429;
         border-radius: 5px;
     }
+    #progress:hover {
+        border: 3px solid green;
+    }
     #progress::chunk {
-        background-color: blue;
+        background-color: #344f6e;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
     }
@@ -115,6 +122,10 @@ StyleSheet = """
         background-color: blue;
     }
     
-    
+    QPushButton#back_button {
+        background-color: transparent;
+        border: none;
+        color: #437ccc;
+    }
     
 """

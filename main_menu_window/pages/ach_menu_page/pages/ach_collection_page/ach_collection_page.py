@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QToolButton, QGridLayout, QScrollAr
 from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
 from main_menu_window.pages.ach_menu_page.pages.current_ach_info_page import CurrentAchievementInfoPage
+from main_menu_window.widgets.h_line import QHLine
 from .achievement_collection_button import AchievementCollectionButton
 from .achievement_info import AchievementInfo
 from .achievement_info_page import AchievementInfoPage
@@ -23,23 +24,32 @@ class AchievementCollectionPage(QWidget):
         self.background.setObjectName("panel")
         # --- Back Button
         self.back_button = QPushButton("< Achievements Menu", self)
+        self.back_button.setObjectName("back_button")
+        self.back_button.resize(150, 20)
+        self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
         # --- Achievement Collection Label
-        self.ach_collection_label = QLabel("Achievement Collection", self)
-        self.ach_collection_label.move(10, 30)
+        self.ach_collection_label = QLabel("Collection", self)
+        self.ach_collection_label.setStyleSheet(""" font-size: 26pt; """)
+        self.ach_collection_label.move(60, 24)
+        # --- Horizontal Line
+        self.h_line = QHLine(self)
+        self.h_line.resize(self.width() - 20, 10)
+        self.h_line.move(10, 56)
         # Buttons
         # --- Container for scroll area; for resizing
         self.acb_scroll_area_container = QWidget(self)
-        self.acb_scroll_area_container.resize(self.width(), 280)
-        self.acb_scroll_area_container.move(0, 60)
+        self.acb_scroll_area_container.resize(self.width()-10, 280)
+        self.acb_scroll_area_container.move(10, 80)
         # --- Scroll area; contain achievement collection buttons
         self.acb_scroll_area = QScrollArea(self.acb_scroll_area_container)
         self.acb_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.acb_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.acb_scroll_area.setWidgetResizable(True)
-        self.acb_scroll_area.resize(self.width(), 280)
+        self.acb_scroll_area.resize(self.width()-10, 280)
         # --- Outer container for outer achievement collection buttons layout
         self.acb_outer_container = QWidget()
+        self.acb_outer_container.setObjectName("panel")
         self.acb_outer_container.move(0, 50)
         self.acb_scroll_area.setWidget(self.acb_outer_container)
         # --- Outer achievement collection buttons layout
