@@ -101,8 +101,8 @@ class AchievementMenuPage(QWidget):
 
     def keyPressEvent(self, event):
         super().keyPressEvent(event)
-        if event.key() == Qt.Key.Key_Return:
-            self.create_new_achievement()
+        #if event.key() == Qt.Key.Key_Return:
+        #    self.create_new_achievement()
 
     def sliding_page_in(self, page):
         sliding_page_anim = QPropertyAnimation(page, b"pos")
