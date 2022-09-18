@@ -62,3 +62,15 @@ https://www.faqcode4u.com/faq/122502/how-to-change-the-width-of-tabs-in-a-qplain
 
 Dave Smith's Blog: Fancy QSlider Stylesheet |
 https://thesmithfam.org/blog/2010/03/10/fancy-qslider-stylesheet/
+
+StackOverflow: How to set a stylesheet for the QScrollBar in a QScrollArea? |
+https://stackoverflow.com/questions/54595957/how-to-set-a-stylesheet-for-the-qscrollbar-in-a-qscrollarea
+
+StackOverflow: Qt style - transparent border | 
+https://stackoverflow.com/questions/6325504/qt-style-transparent-border
+
+StackOverflow: Hide QScrollBar arrows |
+https://stackoverflow.com/questions/21157195/hide-qscrollbar-arrows
+
+StackOverflow: PyQt: Changing cursor when hovering a button |
+https://stackoverflow.com/questions/36725245/pyqt-changing-cursor-when-hovering-a-button

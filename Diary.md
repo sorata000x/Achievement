@@ -1,3 +1,8 @@
+09/17/22
+
+I have difficulty wrapping my head around why QTextEdit doesn't have mouse press event
+in the event filter, and I could not find a walk around way to do it either.
+
 09/10/22
 
 Today I will be working on the achievement collection page.

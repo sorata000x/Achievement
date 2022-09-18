@@ -1,31 +1,18 @@
 StyleSheet = """
+    #background_primary {
+        background-color: #34373b;
+    }
+    #background_secondary {
+        background-color: #484b4f;
+    }
+
+
     #panel {
         background-color: #34373b;
         border-radius: 5px; 
     }
-    QPushButton#menu_button {
-        background-color: #3f4a5e;
-        border-radius: 5px; 
-        height: 34px;
-        font-size: 46pt;
-        text-align: left;
-        padding: 8px;
-    }
-    QPushButton#menu_button:hover {
-        background-color: #8c8c9c;
-    }
-    QPushButton#menu_button:pressed {
-        background-color: #6f6f7d;
-    }
-    QPushButton#create_new_button {
-        border: 2px solid #d8d8e3;
-        color: #acacbf;
-        border-radius: 5px; 
-        height: 31px;
-        font-size: 20pt;
-        text-align: center;
-        padding: 8px;
-    }
+    
+    
     QSlider#current_achievement_button_progress_slider::groove:horizontal {
         background-color: black;
         height: 19px;
@@ -82,15 +69,15 @@ StyleSheet = """
         text-align: center;
         border: 0;
         background-color: #202429;
-        border-radius: 5px;
+        border-radius: 3px;
     }
     #progress:hover {
-        border: 3px solid green;
+        border: 3px solid rgba(84, 116, 156, 200);
     }
     #progress::chunk {
         background-color: #344f6e;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
     }
     
     #icon {
@@ -112,7 +99,7 @@ StyleSheet = """
     }
     
     #info_progress::handle:horizontal {
-        background-color: green;
+        background-color: white;
         width: 3px;
         border-radius: 0px;
         margin: -2px 0px;
@@ -128,4 +115,28 @@ StyleSheet = """
         color: #437ccc;
     }
     
+    QLabel {
+        color: white;
+    }
+    
+    QLineEdit {
+                background: #484b4f;
+                color: white;
+                border: none;
+                font-size: 14pt;
+                border-radius: 1px;
+                padding: 3px;
+            }
+            QLineEdit::read-only {
+                background: transparent;
+            }
+    QTextEdit {
+        border: none;
+        color: white;   
+    }
+    QTextEdit::read-only {
+        background-color: transparent;
+        color: white;
+        border: none;
+    }
 """

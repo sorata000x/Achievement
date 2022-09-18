@@ -3,6 +3,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QWidget, QLabel, QToolButton, QGridLayout, QScrollArea, QPushButton, QSpacerItem, \
     QSizePolicy, QHBoxLayout, QVBoxLayout
 from main_menu_window.config import *
+from main_menu_window.functions import getFont
 from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
 from main_menu_window.pages.ach_menu_page.pages.current_ach_info_page import CurrentAchievementInfoPage
 from main_menu_window.widgets.h_line import QHLine
@@ -30,17 +31,18 @@ class AchievementCollectionPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Achievement Collection Label
         self.ach_collection_label = QLabel("Collection", self)
-        self.ach_collection_label.setStyleSheet(""" font-size: 26pt; """)
-        self.ach_collection_label.move(60, 24)
+        self.ach_collection_label.setStyleSheet("""font-size: 26pt; color: white;""")
+        self.ach_collection_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
+        self.ach_collection_label.move(70, 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
-        self.h_line.resize(self.width() - 20, 10)
-        self.h_line.move(10, 56)
+        self.h_line.resize(self.width() - 20, 1)
+        self.h_line.move(10, 62)
         # Buttons
         # --- Container for scroll area; for resizing
         self.acb_scroll_area_container = QWidget(self)
         self.acb_scroll_area_container.resize(self.width()-10, 280)
-        self.acb_scroll_area_container.move(10, 80)
+        self.acb_scroll_area_container.move(10, 74)
         # --- Scroll area; contain achievement collection buttons
         self.acb_scroll_area = QScrollArea(self.acb_scroll_area_container)
         self.acb_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)

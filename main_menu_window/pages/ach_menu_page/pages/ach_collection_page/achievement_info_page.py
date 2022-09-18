@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QPoint
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QPoint, QEvent
 from PyQt6.QtGui import QIcon, QPainter
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPlainTextEdit, QPushButton, QStyleOption, QStyle
 
@@ -19,52 +19,73 @@ class AchievementInfoPage(QWidget):
         # Animation
         self.sliding_page_anim = QPropertyAnimation(self, b"pos")
         self.sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
-        # Back Button
-        self.back_button = QToolButton(self)
-        self.back_button.resize(30, 30)
+        # Element
+        # --- Background
+        self.background = QWidget(self)
+        self.background.setObjectName("panel")
+        self.background.resize(self.size())
+        # --- Back Button
+        self.back_button = QPushButton("< Back", self)
+        self.back_button.setObjectName("back_button")
+        self.back_button.resize(50, 20)
+        self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
-        # Delete Button
+        # --- Delete Button (not implemented)
         self.delete_button = QToolButton(self)
         self.delete_button.resize(30, 30)
         self.delete_button.move(170, 10)
-        # Edit Button
+        # --- Edit Button (not implemented)
         self.edit_button = QToolButton(self)
         self.edit_button.resize(30, 30)
         self.edit_button.move(210, 10)
-        # Icon
+        # --- Icon
         self.icon = QToolButton(self)
         self.icon.setIcon(QIcon("images/trophy_icon.png"))
         self.icon.setObjectName("icon")
-        self.icon.setIconSize(QSize(50, 50))
-        self.icon.resize(50, 50)
-        self.icon.move(int(self.width()/2-self.icon.width()/2-10), 50)
-        # Title
-        self.title = QLabel(self)
-        self.title.setStyleSheet("color: black; font-size: 22pt;")
-        self.title.move(15, 110)
-        # Summary
-        self.summary = QLabel(self)
-        self.summary.setStyleSheet("color: black; font-size: 16pt;")
-        self.summary.move(15, 140)
-        # Description
+        self.icon.setIconSize(QSize(60, 60))
+        self.icon.resize(60, 60)
+        self.icon.move(10, 50)
+        # --- Title
+        # ------ label
+        self.title_label = QLabel("TITLE", self)
+        self.title_label.setStyleSheet("""font-weight: bold;""")
+        self.title_label.move(10, 124)
+        # ------ text
+        self.title_text = QLabel(self)
+        self.title_text.move(14, 144)
+        # --- Summary
+        # ------ label
+        self.summary_label = QLabel("SUMMARY", self)
+        self.summary_label.setStyleSheet("""font-weight: bold;""")
+        self.summary_label.move(10, 174)
+        # ------ text
+        self.summary_text = QLabel(self)
+        self.summary_text.move(14, 194)
+        # --- Description
+        # ------ label
         self.description_label = QLabel("DESCRIPTION", self)
-        self.description_label.move(15, 170)
+        self.description_label.setStyleSheet("""font-weight: bold;""")
+        self.description_label.move(10, 224)
+        # ------ field
         self.description_field = QPlainTextEdit(self)
         self.description_field.setDisabled(True)
         self.description_field.setStyleSheet("""
-            QPlainTextEdit::disabled {
-                background-color: gray;
-                color: white;
-            }
-        """)
+                    QPlainTextEdit::disabled {
+                        background-color: transparent;
+                        color: white;
+                    }
+                """)
+        self.description_field.setContentsMargins(0, 0, 0, 0)
         self.description_field.resize(226, 96)
-        self.description_field.move(15, 190)
+        self.description_field.move(10, 240)
+
+
 
     def setInfo(self, title, summary, description):
-        self.title.setText(title)
-        self.title.adjustSize()
-        self.summary.setText(summary)
-        self.summary.adjustSize()
+        self.title_text.setText(title)
+        self.title_text.adjustSize()
+        self.summary_text.setText(summary)
+        self.summary_text.adjustSize()
         self.description_field.setPlainText(description)
         #self.achievement_button = achievement_button
 

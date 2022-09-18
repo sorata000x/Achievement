@@ -1,6 +1,7 @@
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QPoint
 from PyQt6.QtWidgets import QWidget, QPushButton, QScrollArea, QVBoxLayout, QLabel
 
+from main_menu_window.functions import getFont
 from main_menu_window.pages.ach_menu_page.pages.create_new_page import CreateNewPage
 from main_menu_window.pages.ach_menu_page.pages.current_ach_info_page import CurrentAchievementInfoPage
 from main_menu_window.config import *
@@ -28,28 +29,29 @@ class AchievementMenuPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Achievement Label
         self.achievement_label = QLabel("Achievement", self)
-        self.achievement_label.setStyleSheet(""" font-size: 26pt """)
-        self.achievement_label.move(54, 24)
+        self.achievement_label.setStyleSheet("""font-size: 26pt; color: white;""")
+        self.achievement_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
+        self.achievement_label.move(54, 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
-        self.h_line.resize(self.width() - 20, 10)
-        self.h_line.move(10, 56)
+        self.h_line.resize(self.width() - 20, 1)
+        self.h_line.move(10, 62)
         # ------ Achievement Collection Button
         self.achievement_collection_button = MenuButtonWidget("Collection", self)
-        self.achievement_collection_button.setFixedWidth(self.width()-27)
+        self.achievement_collection_button.setFixedWidth(self.width()-31)
         self.achievement_collection_button.setFixedHeight(50)
-        self.achievement_collection_button.move(10, 70)
+        self.achievement_collection_button.move(14, 74)
         # --- Achievements Buttons
         # ------ Widget to contain scroll area; for resizing
         self.ab_scroll_area_container = QWidget(self)
-        self.ab_scroll_area_container.resize(self.width()-10, 260)
-        self.ab_scroll_area_container.move(10, 118)
+        self.ab_scroll_area_container.resize(self.width()-10, 256)
+        self.ab_scroll_area_container.move(14, 128)
         # ------ Scroll Area, to contain buttons
         self.ab_scroll_area = QScrollArea(self.ab_scroll_area_container)
         self.ab_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.ab_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.ab_scroll_area.setWidgetResizable(True)
-        self.ab_scroll_area.resize(self.width()-10, 258)
+        self.ab_scroll_area.resize(self.width()-14, 256)
         self.ab_scroll_area.move(0, 3)
         self.ab_scroll_area.setContentsMargins(0, 0, 0, 0)
         # --------- Widget to contain created achievement buttons layout
@@ -60,8 +62,8 @@ class AchievementMenuPage(QWidget):
         # --------- Layout
         self.cab_layout = QVBoxLayout()
         self.cab_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.cab_layout.setContentsMargins(0, 10, 0, 0)
-        self.cab_layout.setSpacing(18)
+        self.cab_layout.setContentsMargins(0, 0, 0, 0)
+        self.cab_layout.setSpacing(14)
         self.cab_widget.setLayout(self.cab_layout)
         # --------- Create New Button: always at bottom
         self.create_new_button = CreateNewButtonWidget()
@@ -73,7 +75,13 @@ class AchievementMenuPage(QWidget):
         self.create_new_page = CreateNewPage(self)
         self.create_new_page.clear()
         self.create_new_page.hide()
-        self.create_new_page.ok_button.clicked.connect(self.create_new_achievement)
+        self.create_new_page.ok_button.clicked.connect(
+            lambda _: self.create_new_achievement(
+                self.create_new_page.title_entry.text(),
+                self.create_new_page.summary_entry.text(),
+                self.create_new_page.description_entry.text()
+            )
+        )
         self.create_new_button.clicked.connect(self.create_new_page.show)
         # --- Current Achievement Info Page
         self.current_achievement_info_page = CurrentAchievementInfoPage(self)
@@ -84,7 +92,7 @@ class AchievementMenuPage(QWidget):
         self.achievement_collection_button.clicked.connect(self.ach_collection_page.show)
 
         if True:
-            self.create_new_achievement()
+            self.create_new_achievement("Title", "Summary", "Description")
 
     def move(self, x, y):
         """ Move sub-main_menu_window as well."""
@@ -110,11 +118,11 @@ class AchievementMenuPage(QWidget):
         sliding_page_anim.setEndValue(QPoint(self.width(), 0))
         sliding_page_anim.start()
 
-    def create_new_achievement(self):
+    def create_new_achievement(self, title, summary, description):
         # Create achievement button
-        title = self.create_new_page.title_entry.text()
-        summary = self.create_new_page.summary_entry.text()
-        description = self.create_new_page.description_entry.toPlainText()
+        #title = self.create_new_page.title_entry.text()
+        #summary = self.create_new_page.summary_entry.text()
+        #description = self.create_new_page.description_entry.toPlainText()
         new_achievement_button = CurrentAchievementButton(title, summary, description)
         # Connect button to open info page
         def openCurrentAchievementInfoPage():
