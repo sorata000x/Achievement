@@ -12,10 +12,6 @@ class CurrentAchievementButton(QPushButton):
         # --- Progress
         self.progress_bar = self.ProgressBar(self)
         self.progress_bar.valueChanged.connect(self.checkStatus)
-        # --- Title
-        self.title = QLabel(title, self)
-        self.title.setObjectName("current_achievement_button_title")
-        self.title.move(48, 6)
         # --- Icon
         self.icon = QToolButton(self)
         self.icon.setIcon(QIcon("images/trophy_icon.png"))
@@ -23,6 +19,10 @@ class CurrentAchievementButton(QPushButton):
         self.icon.setIconSize(QSize(30, 30))
         self.icon.resize(36, 36)
         self.icon.move(6, 7)
+        # --- Title
+        self.title = QLabel(title, self)
+        self.title.setObjectName("current_achievement_button_title")
+        self.title.move(48, 6)
         # --- Summary
         self.summary = QLabel(summary, self)
         self.summary.setObjectName("current_achievement_button_summary")
@@ -38,9 +38,20 @@ class CurrentAchievementButton(QPushButton):
     def resizeEvent(self, event):
         self.complete_button.move(
             int(self.width() - self.complete_button.width() - 10),
-            int(self.height()/2 - self.complete_button.height()/2)
+            int(self.height() / 2 - self.complete_button.height() / 2)
         )
         self.progress_bar.resize(self.width(), self.height())
+
+    def setTitle(self, new_title):
+        self.title.setText(new_title)
+        self.title.adjustSize()
+
+    def setSummary(self, new_summary):
+        self.summary.setText(new_summary)
+        self.summary.adjustSize()
+
+    def setDescription(self, new_description):
+        self.description = new_description
 
     def checkStatus(self):
         if self.progress_bar.value() == self.progress_bar.maximum():
@@ -61,12 +72,12 @@ class CurrentAchievementButton(QPushButton):
             super().setValue(p_int)
             if p_int > self.maximum() * (99 / 100):
                 self.setStyleSheet("""
-                    #progress::chunk {
+                    QProgressBar::chunk {
                         border-radius: 5px;
                     }""")
             else:
                 self.setStyleSheet("""
-                    #progress::chunk {
+                    QProgressBar::chunk {
                         border-top-left-radius: 5px;
                         border-bottom-left-radius: 5px;
                     }""")

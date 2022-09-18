@@ -91,7 +91,7 @@ class AchievementMenuPage(QWidget):
         self.ach_collection_page.hide()
         self.achievement_collection_button.clicked.connect(self.ach_collection_page.show)
 
-        if True:
+        if debug:
             self.create_new_achievement("Title", "Summary", "Description")
 
     def move(self, x, y):
@@ -104,31 +104,19 @@ class AchievementMenuPage(QWidget):
         #if event.key() == Qt.Key.Key_Return:
         #    self.create_new_achievement()
 
-    def sliding_page_in(self, page):
-        sliding_page_anim = QPropertyAnimation(page, b"pos")
-        sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
-        sliding_page_anim.setDuration(300)
-        sliding_page_anim.setEndValue(QPoint(0, 0))
-        sliding_page_anim.start()
-
-    def sliding_page_out(self, page):
-        sliding_page_anim = QPropertyAnimation(page, b"pos")
-        sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
-        sliding_page_anim.setDuration(100)
-        sliding_page_anim.setEndValue(QPoint(self.width(), 0))
-        sliding_page_anim.start()
 
     def create_new_achievement(self, title, summary, description):
         # Create achievement button
-        #title = self.create_new_page.title_entry.text()
-        #summary = self.create_new_page.summary_entry.text()
-        #description = self.create_new_page.description_entry.toPlainText()
         new_achievement_button = CurrentAchievementButton(title, summary, description)
+        # Add to buttons
+        self.current_achievement_buttons.append(new_achievement_button)
+
         # Connect button to open info page
         def openCurrentAchievementInfoPage():
             self.current_achievement_info_page.setInfo(title, summary, description, new_achievement_button)
             self.current_achievement_info_page.show()
         new_achievement_button.clicked.connect(openCurrentAchievementInfoPage)
+
         # Connect complete button to completion
         def complete():
             # Add achievement button to collection page
@@ -138,8 +126,7 @@ class AchievementMenuPage(QWidget):
             new_achievement_button.deleteLater()
             self.current_achievement_buttons.remove(new_achievement_button)
         new_achievement_button.complete_button.clicked.connect(complete)
-        # Add to buttons
-        self.current_achievement_buttons.append(new_achievement_button)
+
         # Insert button
         last_index = self.cab_layout.indexOf(self.create_new_button)
         self.cab_layout.insertWidget(last_index, new_achievement_button)

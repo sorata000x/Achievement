@@ -13,6 +13,9 @@ StyleSheet = """
     }
     
     
+    
+    
+    
     QSlider#current_achievement_button_progress_slider::groove:horizontal {
         background-color: black;
         height: 19px;
@@ -65,16 +68,16 @@ StyleSheet = """
         font-size: 13pt;
     }
     
-    #progress {
+    QProgressBar {
         text-align: center;
         border: 0;
         background-color: #202429;
         border-radius: 3px;
     }
-    #progress:hover {
+    QProgressBar:hover {
         border: 3px solid rgba(84, 116, 156, 200);
     }
-    #progress::chunk {
+    QProgressBar::chunk {
         background-color: #344f6e;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;

@@ -74,3 +74,50 @@ https://stackoverflow.com/questions/21157195/hide-qscrollbar-arrows
 
 StackOverflow: PyQt: Changing cursor when hovering a button |
 https://stackoverflow.com/questions/36725245/pyqt-changing-cursor-when-hovering-a-button
+
+
+How to detect the type of widget? - Stack Overflow | 
+https://stackoverflow.com/questions/48347409/how-to-detect-the-type-of-widget
+
+Detect click outside QLineEdit - c++ - Stack Overflow |
+https://stackoverflow.com/questions/15510578/detect-click-outside-qlineedit
+
+Changing only Border color of QFRAME and not color text | 
+https://www.qtcentre.org/threads/44460-Changing-only-Border-color-of-QFRAME-and-not-color-text
+
+PYQT5 Change QPushButton Text and Icon color on hover (eventFilter) | 
+https://johnphung.tech/blog/pyqt5-change-qpushbutton-text-and-icon-color-on-hover
+
+QPropertyAnimation — Qt for Python - Qt Documentation | 
+https://doc.qt.io/qtforpython-5/PySide2/QtCore/QPropertyAnimation.html
+
+
+QColor — Qt for Python - Qt Documentation |
+https://doc.qt.io/qtforpython-5/PySide2/QtGui/QColor.html
+
+QGraphicsEffect — Qt for Python - Qt Documentation |
+https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QGraphicsColorizeEffect.html#PySide2.QtWidgets.PySide2.QtWidgets.QGraphicsColorizeEffect
+
+Qt Form: Disable changing of shape of cursor when it inside of QTextEdit |
+https://forum.qt.io/topic/102220/disable-changing-of-shape-of-cursor-when-it-inside-of-qtextedit
+
+QLineEdit — Qt for Python | 
+https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QLineEdit.html
+
+StackOverflow: TypeError: <lambda>() missing 1 required positional argument: | 
+https://stackoverflow.com/questions/47663839/typeerror-lambda-missing-1-required-positional-argument
+
+QMouseEvent — Qt for Python - Qt Documentation | 
+https://doc.qt.io/qtforpython-5/PySide2/QtGui/QMouseEvent.html
+
+QEvent — Qt for Python - Qt Documentation | 
+https://doc.qt.io/qtforpython-5/PySide2/QtCore/QEvent.html
+
+The Event System - Qt for Python - Qt Documentation |
+https://doc.qt.io/qtforpython/overviews/eventsandfilters.html
+
+StackOverflow: Override a method at instance level | 
+https://stackoverflow.com/questions/394770/override-a-method-at-instance-level
+
+StackOverflow: Is it a good practice to nest classes? [closed] |
+https://stackoverflow.com/questions/30376127/is-it-a-good-practice-to-nest-classes

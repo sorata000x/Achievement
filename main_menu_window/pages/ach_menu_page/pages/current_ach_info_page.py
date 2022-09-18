@@ -1,13 +1,16 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QEvent
-from PyQt6.QtGui import QIcon, QPainter
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QEvent, pyqtSignal
+from PyQt6.QtGui import QIcon, QPainter, QMouseEvent
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPushButton, QStyleOption, QStyle, \
-    QLineEdit, QTextEdit
+    QLineEdit, QTextEdit, QButtonGroup
 
 from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
 
 
 class CurrentAchievementInfoPage(QWidget):
+    """ Note: Please set info from target achievement button before open. """
+    closed = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
         # Page Config
@@ -16,7 +19,7 @@ class CurrentAchievementInfoPage(QWidget):
         # --- Target Achievement Button
         self.achievement_button = CurrentAchievementButton()  # corresponding achievement button of the info
         # --- Group of LineEdit or TextEdit of info
-        self.entry_group = []
+        self.entry_group = EntryGroup()
         # Animation
         self.sliding_page_anim = QPropertyAnimation(self, b"pos")
         self.sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
@@ -56,34 +59,20 @@ class CurrentAchievementInfoPage(QWidget):
         self.title_label.setStyleSheet("""font-weight: bold;""")
         self.title_label.move(10, 124)
         # --------- Entry
-        self.title_entry = QLineEdit(self)
+        self.title_entry = TitleLineEdit(self)
         self.title_entry.move(14, 144)
-        # ------------ read only initially
-        self.title_entry.setReadOnly(True)
-        # ------------ set editable and close other entry fields when being selected by double click
-        self.title_entry.mouseDoubleClickEvent = lambda event: eventHandler(self.title_entry, event)
-        # ------------ close other entry fields when being clicked
-        self.title_entry.mousePressEvent = lambda event: eventHandler(self.title_entry, event)
-        # ------------ change achievement button info when edited : TODO
-        self.title_entry.editingFinished.connect(lambda: print("60"))
         # ------------ add to entry group
-        self.entry_group.append(self.title_entry)
+        self.entry_group.addEntry(self.title_entry)
         # ------ Summary
         # --------- Label
         self.summary_label = QLabel("SUMMARY", self)
         self.summary_label.setStyleSheet("""font-weight: bold;""")
         self.summary_label.move(10, 174)
         # --------- Entry
-        self.summary_entry = QLineEdit(self)
+        self.summary_entry = SummaryLineEdit(self)
         self.summary_entry.move(14, 194)
-        # ------------ read only initially
-        self.summary_entry.setReadOnly(True)
-        # ------------ set editable and close other entry fields when being selected by double click
-        self.summary_entry.mouseDoubleClickEvent = lambda event: eventHandler(self.summary_entry, event)
-        # ------------ close other entry fields when being clicked
-        self.summary_entry.mousePressEvent = lambda event: eventHandler(self.summary_entry, event)
         # ------------ add to entry group
-        self.entry_group.append(self.summary_entry)
+        self.entry_group.addEntry(self.summary_entry)
         # ------ Progress
         # --------- Label
         self.progress_label = QLabel("PROGRESS", self)
@@ -104,71 +93,149 @@ class CurrentAchievementInfoPage(QWidget):
         self.description_label.setStyleSheet("""font-weight: bold;""")
         self.description_label.move(10, 274)
         # --------- Entry
-        self.description_entry = QTextEdit(self)
+        self.description_entry = DescriptionTextEdit(self)
         self.description_entry.resize(226, 96)
         self.description_entry.move(14, 294)
-        # ------------ read only initially
-        self.description_entry.setReadOnly(True)
-        # ------------ prevent cursor change to IBeamCursor (default) when read only
-        self.description_entry.viewport().setCursor(Qt.CursorShape.ArrowCursor)
-        # ------------ set editable and close other entry fields when being selected by double click
-        self.description_entry.mouseDoubleClickEvent = lambda event: eventHandler(self.description_entry, event)
-        # ------------ close other entry fields when being clicked
-        self.description_entry.mousePressEvent = lambda event: eventHandler(self.description_entry, event)
         # ------------ add to entry group
-        self.entry_group.append(self.description_entry)
+        self.entry_group.addEntry(self.description_entry)
 
-        # Function
-        def eventHandler(source, event):
-            if event.type() == QEvent.Type.MouseButtonPress or event.type() == QEvent.Type.MouseButtonDblClick:
-                for edit in self.entry_group:
-                    if edit != source:
-                        edit.setReadOnly(True)
-                        if isinstance(edit, QTextEdit):
-                            print("114")
-                            edit.setStyleSheet("""
-                                background-color: transparent; 
-                                color: white; 
-                                border: none; 
-                                border-radius: 2px;
-                            """)
-                if event.type() == QEvent.Type.MouseButtonDblClick:
-                    if isinstance(source, QLineEdit):
-                        source.setReadOnly(False)
-                    elif isinstance(source, QTextEdit):
-                        source.setReadOnly(False)
-                        source.viewport().setCursor(Qt.CursorShape.IBeamCursor)
-                        source.setStyleSheet("""
-                            background-color: #484b4f; 
-                            color: white; 
-                            border: none; 
-                            border-radius: 2px;
-                        """)
+    def hide(self) -> None:
+        super().hide()
+        self.closed.emit()
 
     def mousePressEvent(self, event):
         super().mousePressEvent(event)
-        self.title_entry.setReadOnly(True)
-        self.summary_entry.setReadOnly(True)
-        self.description_entry.setReadOnly(True)
-        self.description_entry.setStyleSheet("""
-            QPlainTextEdit::read-only {
-                background-color: transparent;
-                color: white;
-                border: none;
-                border-radius: 1px;
-            }
-        """)
+        self.entry_group.disableAll()
 
     def setInfo(self, title, summary, description, achievement_button):
+        self.achievement_button = achievement_button
         self.title_entry.setText(title)
         self.title_entry.adjustSize()
+        self.title_entry.setTarget(achievement_button)
         self.summary_entry.setText(summary)
         self.summary_entry.adjustSize()
+        self.summary_entry.setTarget(achievement_button)
         self.description_entry.setPlainText(description)
-        self.achievement_button = achievement_button
+        self.description_entry.setTarget(achievement_button)
 
     def paintEvent(self, pe):
         o = QStyleOption()
         o.initFrom(self)
         p = QPainter(self)
         self.style().drawPrimitive(QStyle.PrimitiveElement.PE_Widget, o, p, self)
+
+class TitleLineEdit(QLineEdit):
+    clicked = pyqtSignal()
+    double_clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Property
+        self.target = CurrentAchievementButton()
+        # Config
+        self.setReadOnly(True)
+
+    def setTarget(self, target):
+        self.target = target
+
+    def setReadOnly(self, a0: bool) -> None:
+        super().setReadOnly(a0)
+        if a0:
+            self.target.setTitle(self.text())
+
+    def mousePressEvent(self, a0: QMouseEvent) -> None:
+        super().mousePressEvent(a0)
+        self.clicked.emit()
+
+    def mouseDoubleClickEvent(self, a0: QMouseEvent) -> None:
+        super().mouseDoubleClickEvent(a0)
+        self.double_clicked.emit()
+
+class SummaryLineEdit(QLineEdit):
+    clicked = pyqtSignal()
+    double_clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Property
+        self.target = CurrentAchievementButton()
+        # Config
+        self.setReadOnly(True)
+
+    def setTarget(self, target):
+        self.target = target
+
+    def setReadOnly(self, a0: bool) -> None:
+        super().setReadOnly(a0)
+        if a0:
+            self.target.setSummary(self.text())
+
+    def mousePressEvent(self, a0: QMouseEvent) -> None:
+        super().mousePressEvent(a0)
+        self.clicked.emit()
+
+    def mouseDoubleClickEvent(self, a0: QMouseEvent) -> None:
+        super().mouseDoubleClickEvent(a0)
+        self.double_clicked.emit()
+
+class DescriptionTextEdit(QTextEdit):
+    clicked = pyqtSignal()
+    double_clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Property
+        self.target = CurrentAchievementButton()
+        # Config
+        self.setReadOnly(True)
+
+    def setTarget(self, target):
+        self.target = target
+
+    def setReadOnly(self, a0: bool) -> None:
+        super().setReadOnly(a0)
+        if a0:
+            self.viewport().setCursor(Qt.CursorShape.ArrowCursor)
+            self.setStyleSheet("""
+                background-color: transparent; 
+                color: white; 
+                border: none; 
+                border-radius: 2px;
+            """)
+            self.target.setDescription(self.toPlainText())
+        else:
+            self.viewport().setCursor(Qt.CursorShape.IBeamCursor)
+            self.setStyleSheet("""
+                background-color: #484b4f; 
+                color: white; 
+                border: none; 
+                border-radius: 2px;
+            """)
+
+    def mousePressEvent(self, a0: QMouseEvent) -> None:
+        super().mousePressEvent(a0)
+        self.clicked.emit()
+
+    def mouseDoubleClickEvent(self, a0: QMouseEvent) -> None:
+        super().mouseDoubleClickEvent(a0)
+        self.double_clicked.emit()
+
+
+class EntryGroup:
+    def __init__(self):
+        self.entry_group = []
+
+    def addEntry(self, entry):
+        entry.clicked.connect(lambda: self.disableOther(entry))
+        entry.double_clicked.connect(lambda: self.disableOther(entry))
+        entry.double_clicked.connect(lambda: entry.setReadOnly(False))
+        self.entry_group.append(entry)
+
+    def disableOther(self, source):
+        for edit in self.entry_group:
+            if edit != source:
+                edit.setReadOnly(True)
+
+    def disableAll(self):
+        for edit in self.entry_group:
+            edit.setReadOnly(True)
