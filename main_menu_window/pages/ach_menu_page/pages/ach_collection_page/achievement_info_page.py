@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPlainTextEdi
 from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.achievement_collection_button import \
     AchievementCollectionButton
-from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
+from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
 
 
 class AchievementInfoPage(QWidget):

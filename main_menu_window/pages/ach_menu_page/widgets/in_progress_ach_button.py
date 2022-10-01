@@ -1,9 +1,10 @@
 from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QPushButton, QLabel, QToolButton, QProgressBar, QStyle
+from PyQt6.QtWidgets import QPushButton, QLabel, QToolButton, QProgressBar
 
+from ..data.achievement_info import AchievementInfo
 
-class CurrentAchievementButton(QPushButton):
+class InProgressAchievementButton(QPushButton):
     def __init__(self, title="", summary="", description="", parent=None):
         super().__init__(parent)
         # Config
@@ -11,7 +12,7 @@ class CurrentAchievementButton(QPushButton):
         # Element
         # --- Progress
         self.progress_bar = self.ProgressBar(self)
-        self.progress_bar.valueChanged.connect(self.checkStatus)
+        self.progress_bar.valueChanged.connect(self.checkStatus)    # check if achievement completed
         # --- Icon
         self.icon = QToolButton(self)
         self.icon.setIcon(QIcon("images/trophy_icon.png"))
@@ -20,20 +21,58 @@ class CurrentAchievementButton(QPushButton):
         self.icon.resize(36, 36)
         self.icon.move(6, 7)
         # --- Title
-        self.title = QLabel(title, self)
-        self.title.setObjectName("current_achievement_button_title")
-        self.title.move(48, 6)
+        self._title = QLabel(title, self)
+        self._title.setObjectName("current_achievement_button_title")
+        self._title.move(48, 6)
         # --- Summary
-        self.summary = QLabel(summary, self)
-        self.summary.setObjectName("current_achievement_button_summary")
-        self.summary.move(48, 28)
+        self._summary = QLabel(summary, self)
+        self._summary.setObjectName("current_achievement_button_summary")
+        self._summary.move(48, 28)
         # --- Description
-        self.description = description
+        self._description = description
         # --- Complete button
         self.complete_button = QToolButton(self)
         self.complete_button.setIcon(QIcon("images/checkmark.png"))
         self.complete_button.resize(30, 30)
         self.complete_button.hide()
+        # Achievement Data
+        self.achievement_info = AchievementInfo(title, summary, description, progress=0)
+        self.achievement_info.changed.connect(lambda: self.setInfo(self.achievement_info))
+
+    # Mutator
+
+    def title(self):
+        return self._title.text()
+
+    def summary(self):
+        return self._summary.text()
+
+    def description(self):
+        return self._description.title()
+
+    # ACCESSOR
+
+    def setTitle(self, new_title):
+        self._title.setText(new_title)
+        self._title.adjustSize()
+
+    def setSummary(self, new_summary):
+        self._summary.setText(new_summary)
+        self._summary.adjustSize()
+
+    def setDescription(self, new_description):
+        self._description = new_description
+
+    def setProgress(self, new_value):
+        self.progress_bar.setValue(new_value)
+
+    def setInfo(self, new_achievement_info):
+        self.setTitle(new_achievement_info.title())
+        self.setSummary(new_achievement_info.summary())
+        self.setDescription(new_achievement_info.description())
+        self.setProgress(new_achievement_info.progress())
+
+    # EVENT
 
     def resizeEvent(self, event):
         self.complete_button.move(
@@ -42,22 +81,16 @@ class CurrentAchievementButton(QPushButton):
         )
         self.progress_bar.resize(self.width(), self.height())
 
-    def setTitle(self, new_title):
-        self.title.setText(new_title)
-        self.title.adjustSize()
-
-    def setSummary(self, new_summary):
-        self.summary.setText(new_summary)
-        self.summary.adjustSize()
-
-    def setDescription(self, new_description):
-        self.description = new_description
+    # Function
 
     def checkStatus(self):
+        """ Check if the achievement is completed or not """
         if self.progress_bar.value() == self.progress_bar.maximum():
             self.complete_button.show()
         else:
             self.complete_button.hide()
+
+    # Widget
 
     class ProgressBar(QProgressBar):
         def __init__(self, parent=None):
