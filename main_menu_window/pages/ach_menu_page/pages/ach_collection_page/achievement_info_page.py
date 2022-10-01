@@ -1,11 +1,10 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, Qt, QPoint, QEvent
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint
 from PyQt6.QtGui import QIcon, QPainter
-from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPlainTextEdit, QPushButton, QStyleOption, QStyle
+from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QPlainTextEdit, QPushButton, QStyleOption, QStyle
 
 from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.achievement_collection_button import \
     AchievementCollectionButton
-from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
 
 
 class AchievementInfoPage(QWidget):
@@ -32,6 +31,16 @@ class AchievementInfoPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Delete Button (not implemented)
         self.delete_button = QToolButton(self)
+        self.delete_button.setStyleSheet("""
+            QToolButton {
+                background-color: transparent;
+            }
+            QToolButton::hover {
+                background-color: rgba(255, 255, 255, 50)
+            }
+        """)
+        self.delete_button.setIcon(QIcon("images/trash_bin.png"))
+        self.delete_button.setIconSize(QSize(24, 24))
         self.delete_button.resize(30, 30)
         self.delete_button.move(170, 10)
         # --- Edit Button (not implemented)
@@ -78,8 +87,6 @@ class AchievementInfoPage(QWidget):
         self.description_field.setContentsMargins(0, 0, 0, 0)
         self.description_field.resize(226, 96)
         self.description_field.move(10, 240)
-
-
 
     def setInfo(self, title, summary, description):
         self.title_text.setText(title)

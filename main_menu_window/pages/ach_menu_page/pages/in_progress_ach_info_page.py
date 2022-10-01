@@ -7,7 +7,7 @@ from main_menu_window.config import *
 from ..data.achievement_info import AchievementInfo
 
 
-class CurrentAchievementInfoPage(QWidget):
+class InProgressAchievementInfoPage(QWidget):
     """ Note: Please set info from target achievement button before open. """
     closed = pyqtSignal()
 
@@ -80,13 +80,27 @@ class CurrentAchievementInfoPage(QWidget):
         self.progress_label.move(10, 224)
         # --------- Bar
         self.progress_bar = QSlider(Qt.Orientation.Horizontal, self)
-        self.progress_bar.setObjectName("info_progress")
+        self.progress_bar.setStyleSheet("""
+            QSlider::groove:horizontal {
+                background-color: black;
+                height: 18px;
+            }
+            QSlider::handle:horizontal {
+                background-color: #9c9c9c;
+                width: 3px;
+                border-radius: 1px;
+                margin: -2px 0px;
+            }
+            QSlider::sub-page:horizontal {
+                background-color: #344f6e;
+            }
+        """)
         self.progress_bar.setMinimum(0)
         self.progress_bar.setMaximum(10)
-        self.progress_bar.setFixedWidth(225)
+        self.progress_bar.setFixedWidth(220)
         self.progress_bar.valueChanged.connect(
             lambda: self.achievement_info.setProgress(self.progress_bar.value()))
-        self.progress_bar.move(14, 244)
+        self.progress_bar.move(20, 244)
         # ------ Description
         # --------- Label
         self.description_label = QLabel("DESCRIPTION", self)

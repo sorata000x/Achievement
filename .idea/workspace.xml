@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f46db52-1aa7-4d1d-95db-adfe6842c389" name="Changes" comment="" />
+    <list default="true" id="9f46db52-1aa7-4d1d-95db-adfe6842c389" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/images/trash_bin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/ach_collection_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/ach_collection_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +35,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -62,5 +83,16 @@
       <updated>1664654443767</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

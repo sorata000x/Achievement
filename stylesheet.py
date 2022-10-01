@@ -96,21 +96,7 @@ StyleSheet = """
     
     
     
-    #info_progress::groove:horizontal {
-        background-color: black;
-        height: 18px;
-    }
     
-    #info_progress::handle:horizontal {
-        background-color: white;
-        width: 3px;
-        border-radius: 0px;
-        margin: -2px 0px;
-    }
-    
-    #info_progress::sub-page:horizontal {
-        background-color: blue;
-    }
     
     QPushButton#back_button {
         background-color: transparent;

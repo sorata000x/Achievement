@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QToolButton, QGridLayout, QScrollAr
 from main_menu_window.config import *
 from main_menu_window.functions import getFont
 from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
-from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import CurrentAchievementInfoPage
+from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import InProgressAchievementInfoPage
 from main_menu_window.widgets.h_line import QHLine
 from .achievement_collection_button import AchievementCollectionButton
 from .achievement_info import AchievementInfo
