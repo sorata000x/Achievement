@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPushButton, 
     QLineEdit, QTextEdit, QButtonGroup
 
 from main_menu_window.config import *
-from ..data.achievement_info import AchievementInfo
+from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
 
 
 class CurrentAchievementInfoPage(QWidget):
@@ -16,8 +16,8 @@ class CurrentAchievementInfoPage(QWidget):
         # Page Config
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         # Property
-        # --- Target Achievement Info
-        self.achievement_info = AchievementInfo()  # corresponding achievement button of the info
+        # --- Target Achievement Button
+        self.achievement_button = CurrentAchievementButton()  # corresponding achievement button of the info
         # --- Group of LineEdit or TextEdit of info
         self.entry_group = EntryGroup()
         # Animation
@@ -85,7 +85,7 @@ class CurrentAchievementInfoPage(QWidget):
         self.progress_bar.setMaximum(10)
         self.progress_bar.setFixedWidth(225)
         self.progress_bar.valueChanged.connect(
-            lambda: self.achievement_info.setProgress(self.progress_bar.value()))
+            lambda: self.achievement_button.progress_bar.setValue(self.progress_bar.value()))
         self.progress_bar.move(14, 244)
         # ------ Description
         # --------- Label
@@ -107,19 +107,16 @@ class CurrentAchievementInfoPage(QWidget):
         super().mousePressEvent(event)
         self.entry_group.disableAll()
 
-    def setInfo(self, achievement_info):
-        self.achievement_info = achievement_info
-        # title entry
-        self.title_entry.setText(achievement_info.title())
+    def setInfo(self, title, summary, description, achievement_button):
+        self.achievement_button = achievement_button
+        self.title_entry.setText(title)
         self.title_entry.adjustSize()
-        self.title_entry.setTarget(achievement_info)
-        # summary entry
-        self.summary_entry.setText(achievement_info.summary())
+        self.title_entry.setTarget(achievement_button)
+        self.summary_entry.setText(summary)
         self.summary_entry.adjustSize()
-        self.summary_entry.setTarget(achievement_info)
-        # description entry
-        self.description_entry.setPlainText(achievement_info.description())
-        self.description_entry.setTarget(achievement_info)
+        self.summary_entry.setTarget(achievement_button)
+        self.description_entry.setPlainText(description)
+        self.description_entry.setTarget(achievement_button)
 
     def paintEvent(self, pe):
         o = QStyleOption()
@@ -134,7 +131,7 @@ class TitleLineEdit(QLineEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Property
-        self.target = AchievementInfo()
+        self.target = CurrentAchievementButton()
         # Config
         self.setReadOnly(True)
 
@@ -161,7 +158,7 @@ class SummaryLineEdit(QLineEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Property
-        self.target = AchievementInfo()
+        self.target = CurrentAchievementButton()
         # Config
         self.setReadOnly(True)
 
@@ -188,7 +185,7 @@ class DescriptionTextEdit(QTextEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Property
-        self.target = AchievementInfo()
+        self.target = CurrentAchievementButton()
         # Config
         self.setReadOnly(True)
 

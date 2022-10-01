@@ -1,8 +1,8 @@
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon
 
-from main_menu_window.main_menu_window import MainWindow
 from stylesheet import StyleSheet
-from widgets.system_tray_icon import SystemTrayIcon
+from main_menu_window.main_menu_window import MainWindow
 
 
 class Application(QApplication):
@@ -16,3 +16,23 @@ class Application(QApplication):
         # Create the Tray
         self.tray = SystemTrayIcon()
         self.tray.activated.connect(lambda _: self.tray.toggle_window(self.main_menu))
+
+class SystemTrayIcon(QSystemTrayIcon):
+    def __init__(self):
+        super().__init__()
+        self.setIcon(QIcon("images/icon.jpg"))
+        self.setVisible(True)
+
+    def toggle_window(self, window):
+        """
+        Show menu window when it is hidden, otherwise hide the window.
+        :return:
+        """
+        if window.isHidden():
+            window.move(self.geometry().bottomLeft().x(), self.geometry().bottomLeft().y() + 5)
+            window.show()
+        else:
+            window.hide()
+        return
+
+

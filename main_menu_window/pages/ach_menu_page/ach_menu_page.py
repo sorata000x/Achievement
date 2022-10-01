@@ -3,9 +3,9 @@ from PyQt6.QtWidgets import QWidget, QPushButton, QScrollArea, QVBoxLayout, QLab
 
 from main_menu_window.functions import getFont
 from main_menu_window.pages.ach_menu_page.pages.create_new_page import CreateNewPage
-from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import CurrentAchievementInfoPage
+from main_menu_window.pages.ach_menu_page.pages.current_ach_info_page import CurrentAchievementInfoPage
 from main_menu_window.config import *
-from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
+from main_menu_window.pages.ach_menu_page.widgets.current_ach_button import CurrentAchievementButton
 from main_menu_window.widgets.h_line import QHLine
 from main_menu_window.widgets.menu_button import MenuButtonWidget
 from main_menu_window.widgets.create_new_button import CreateNewButtonWidget
@@ -84,8 +84,8 @@ class AchievementMenuPage(QWidget):
         )
         self.create_new_button.clicked.connect(self.create_new_page.show)
         # --- Current Achievement Info Page
-        self.in_progress_achievement_info_page = CurrentAchievementInfoPage(self)
-        self.in_progress_achievement_info_page.hide()
+        self.current_achievement_info_page = CurrentAchievementInfoPage(self)
+        self.current_achievement_info_page.hide()
         # --- Achievement Collection Page
         self.ach_collection_page = AchievementCollectionPage(self)
         self.ach_collection_page.hide()
@@ -104,29 +104,30 @@ class AchievementMenuPage(QWidget):
         #if event.key() == Qt.Key.Key_Return:
         #    self.create_new_achievement()
 
-    def showInProgressAchievementPage(self, achievement_info):
-        self.in_progress_achievement_info_page.setInfo(achievement_info)
-        self.in_progress_achievement_info_page.show()
 
     def create_new_achievement(self, title, summary, description):
         # Create achievement button
-        new_achievement_button = InProgressAchievementButton(title, summary, description)   # create a new button
-        new_achievement_button.clicked.connect(
-            lambda: self.showInProgressAchievementPage(new_achievement_button.achievement_info))
-        # Connect complete function to achievement completed.
-        def complete(achievement):
-            """ Triggered after achievement marked complete. """
-            # Add achievement to collection page
-            self.ach_collection_page.addAchievement(
-                achievement.title(), achievement.summary(), achievement.description())
+        new_achievement_button = CurrentAchievementButton(title, summary, description)
+        # Add to buttons
+        self.current_achievement_buttons.append(new_achievement_button)
+
+        # Connect button to open info page
+        def openCurrentAchievementInfoPage():
+            self.current_achievement_info_page.setInfo(title, summary, description, new_achievement_button)
+            self.current_achievement_info_page.show()
+        new_achievement_button.clicked.connect(openCurrentAchievementInfoPage)
+
+        # Connect complete button to completion
+        def complete():
+            # Add achievement button to collection page
+            self.ach_collection_page.addAchievement(title, summary, description)
             # Remove achievement button from menu
             self.cab_layout.removeWidget(new_achievement_button)
             new_achievement_button.deleteLater()
             self.current_achievement_buttons.remove(new_achievement_button)
-        new_achievement_button.complete_button.clicked.connect(lambda: complete(new_achievement_button.achievement_info))
-        # Add to button list
-        self.current_achievement_buttons.append(new_achievement_button)
-        # Insert button in the layout
+        new_achievement_button.complete_button.clicked.connect(complete)
+
+        # Insert button
         last_index = self.cab_layout.indexOf(self.create_new_button)
         self.cab_layout.insertWidget(last_index, new_achievement_button)
         self.create_new_page.clear()
