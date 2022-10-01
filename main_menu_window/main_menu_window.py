@@ -1,11 +1,8 @@
-from PyQt6.QtGui import QFontDatabase
-
-from .config import *
-
-from main_menu_window.widgets.menu_button import MenuButtonWidget
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QToolButton, QLabel
 
+from main_menu_window.widgets.menu_button import MenuButtonWidget
+from .config import *
 from .functions import getFont
 from .pages.ach_menu_page.ach_menu_page import AchievementMenuPage
 from .widgets.h_line import QHLine

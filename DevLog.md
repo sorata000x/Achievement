@@ -1,4 +1,21 @@
+10/01/22
+I wasn't entire sure where I left off the last time I worked, which should have been
+recorded somewhere and that is pretty much the purpose of the diary, and somehow I 
+that still happens, damn you my past self.
+It seems like I am trying to resolve circular import of the achievement pages and the 
+buttons, which I am not sure what I was trying to do. 
+Anyhow, I solved the problem by implementing the achievement info class which I think
+is a clearer way to pass information between the button and the page, and it works 
+pretty well.
+
+09/19/22
+
+Been writing the program for almost every day, I need sometime off to prepare for my
+school which is about to start. I will be starting right after everything else are
+stabled.
+
 09/17/22
+
 
 I have difficulty wrapping my head around why QTextEdit doesn't have mouse press event
 in the event filter, and I could not find a walk around way to do it either.

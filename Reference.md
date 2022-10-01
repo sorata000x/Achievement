@@ -121,3 +121,21 @@ https://stackoverflow.com/questions/394770/override-a-method-at-instance-level
 
 StackOverflow: Is it a good practice to nest classes? [closed] |
 https://stackoverflow.com/questions/30376127/is-it-a-good-practice-to-nest-classes
+
+Sending custom PyQt signals? - StackOverflow | 
+https://stackoverflow.com/questions/2585442/sending-custom-pyqt-signals
+
+PyQt4.QtCore.pyqtSignal object has no attribute 'connect' - StackOverflow | 
+https://stackoverflow.com/questions/2970312/pyqt4-qtcore-pyqtsignal-object-has-no-attribute-connect
+
+How to read from QTextedit in python? - StackOverflow | 
+https://stackoverflow.com/questions/24035660/how-to-read-from-qtextedit-in-python
+
+Might Be Helpful:
+
+PyQt5 Label – Adding Color effect - GeeksforGeeks |
+https://www.geeksforgeeks.org/pyqt5-label-adding-color-effect/
+
+PyQt5 Label – Accessing color of the Color Effect - GeeksforGeeks | 
+https://www.geeksforgeeks.org/pyqt5-label-accessing-color-of-the-color-effect/
+
