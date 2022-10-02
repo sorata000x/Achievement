@@ -99,10 +99,13 @@ class AchievementInfoPage(QWidget):
         self.deletion_confirm_box.delete_button.clicked.connect(self.deleted.emit)
 
     def setInfo(self, achievement_info):
+        # Set title
         self.title_text.setText(achievement_info.title())
         self.title_text.adjustSize()
+        # Set summary
         self.summary_text.setText(achievement_info.summary())
         self.summary_text.adjustSize()
+        # Set description
         self.description_field.setPlainText(achievement_info.description())
 
     def paintEvent(self, pe):

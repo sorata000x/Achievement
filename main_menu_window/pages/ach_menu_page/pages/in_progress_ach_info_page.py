@@ -149,6 +149,8 @@ class InProgressAchievementInfoPage(QWidget):
         # description entry
         self.description_entry.setPlainText(achievement_info.description())
         self.description_entry.setTarget(achievement_info)
+        # progress bar
+        self.progress_bar.setValue(achievement_info.progress())
 
     # Events
 
