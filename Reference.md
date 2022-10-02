@@ -139,3 +139,5 @@ https://www.geeksforgeeks.org/pyqt5-label-adding-color-effect/
 PyQt5 Label – Accessing color of the Color Effect - GeeksforGeeks | 
 https://www.geeksforgeeks.org/pyqt5-label-accessing-color-of-the-color-effect/
 
+Python relative-import script two levels up - Stack Overflow | 
+https://stackoverflow.com/questions/36826839/python-relative-import-script-two-levels-up

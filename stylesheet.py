@@ -50,49 +50,6 @@ StyleSheet = """
     #white-background {
         background-color: white;
     }
-    QPushButton#current_achievement_button {
-        background-color: black;
-        border-radius: 5px; 
-        height: 34px;
-        text-align: left;
-        padding: 8px;
-    }
-    
-    #current_achievement_button_title {
-        color: white;
-        font-size: 18pt;
-    }
-    
-    #current_achievement_button_summary {
-        color: white;
-        font-size: 13pt;
-    }
-    
-    QProgressBar {
-        text-align: center;
-        border: 0;
-        background-color: #202429;
-        border-radius: 3px;
-    }
-    QProgressBar:hover {
-        border: 3px solid rgba(84, 116, 156, 200);
-    }
-    QProgressBar::chunk {
-        background-color: #344f6e;
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-    }
-    
-    #icon {
-        background-color: black;
-        border: 0;
-    }
-    
-    
-    
-    
-    
-    
     
     QPushButton#back_button {
         background-color: transparent;

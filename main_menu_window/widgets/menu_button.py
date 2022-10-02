@@ -13,8 +13,7 @@ class MenuButtonWidget(QPushButton):
         self.setFixedHeight(50)
         self.setStyleSheet("""
             QPushButton {
-                background-color: #3f4a5e;
-                border-radius: 3px; 
+                background-color: #28303b;
                 font-size: 46pt;
                 text-align: left;
                 padding: 8px;
@@ -38,20 +37,18 @@ class MenuButtonWidget(QPushButton):
         # --- Toggle
         if has_toggle:
             self.toggle = ToggleWidget(self)
-            self.toggle.move(180, 13)
+            self.toggle.move(186, 13)
         # Effect
+        # --- change curser
         self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
+        # --- hovering effect
         self.effect = QGraphicsColorizeEffect(self)
         self.effect.setColor(QColor(255, 255, 255))
         self.effect.setStrength(0.1)
         self.setGraphicsEffect(self.effect)
-
         # Animation
         self.animation = QPropertyAnimation()
-
-
-
+        # Event Filter
         self.installEventFilter(self)
 
     def eventFilter(self, source, event):

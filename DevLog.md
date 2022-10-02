@@ -1,4 +1,10 @@
+10/02/22
+
+Gotta be real careful with the stylesheet, since the widgets inherit their parent's
+stylesheet if I don't specify the properties.
+
 10/01/22
+
 I wasn't entire sure where I left off the last time I worked, which should have been
 recorded somewhere and that is pretty much the purpose of the diary, and somehow I 
 that still happens, damn you my past self.

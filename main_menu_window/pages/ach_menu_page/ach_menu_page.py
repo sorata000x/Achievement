@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QWidget, QPushButton, QScrollArea, QVBoxLayout, QLab
 from main_menu_window.config import *
 from main_menu_window.functions import getFont
 from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.ach_collection_page import AchievementCollectionPage
-from main_menu_window.pages.ach_menu_page.pages.create_new_page import CreateNewPage
+from main_menu_window.pages.ach_menu_page.pages.create_achievement_page import CreateAchievementPage
 from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import InProgressAchievementInfoPage
 from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
 from main_menu_window.widgets.create_new_button import CreateNewButtonWidget
@@ -35,27 +35,27 @@ class AchievementMenuPage(QWidget):
         self.achievement_label = QLabel("Achievement", self)
         self.achievement_label.setStyleSheet("""font-size: 26pt; color: white;""")
         self.achievement_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
-        self.achievement_label.move(54, 30)
+        self.achievement_label.move(int(self.width()/2-76), 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
-        self.h_line.resize(self.width() - 20, 1)
-        self.h_line.move(10, 62)
+        self.h_line.resize(self.width(), 1)
+        self.h_line.move(0, 62)
         # ------ Achievement Collection Button
         self.achievement_collection_button = MenuButtonWidget("Collection", self)
-        self.achievement_collection_button.setFixedWidth(self.width()-31)
+        self.achievement_collection_button.setFixedWidth(self.width())
         self.achievement_collection_button.setFixedHeight(50)
-        self.achievement_collection_button.move(14, 74)
+        self.achievement_collection_button.move(0, 68)
         # --- Achievements Buttons
         # ------ Widget to contain scroll area; for resizing
         self.ab_scroll_area_container = QWidget(self)
-        self.ab_scroll_area_container.resize(self.width()-10, 256)
-        self.ab_scroll_area_container.move(14, 128)
+        self.ab_scroll_area_container.resize(self.width(), self.height()-150)
+        self.ab_scroll_area_container.move(0, 118)
         # ------ Scroll Area, to contain buttons
         self.ab_scroll_area = QScrollArea(self.ab_scroll_area_container)
         self.ab_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.ab_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.ab_scroll_area.setWidgetResizable(True)
-        self.ab_scroll_area.resize(self.width()-14, 256)
+        self.ab_scroll_area.resize(self.width(), self.ab_scroll_area_container.height())
         self.ab_scroll_area.move(0, 3)
         self.ab_scroll_area.setContentsMargins(0, 0, 0, 0)
         # --------- Widget to contain created achievement buttons layout
@@ -67,14 +67,14 @@ class AchievementMenuPage(QWidget):
         self.cab_layout = QVBoxLayout()
         self.cab_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.cab_layout.setContentsMargins(0, 0, 0, 0)
-        self.cab_layout.setSpacing(14)
+        self.cab_layout.setSpacing(4)
         self.cab_widget.setLayout(self.cab_layout)
         # --------- Create New Button: always at bottom
         self.create_new_button = CreateNewButtonWidget()
         self.cab_layout.addWidget(self.create_new_button)
         # Pages
         # --- Create-New Page
-        self.create_new_page = CreateNewPage(self)
+        self.create_new_page = CreateAchievementPage(self)
         self.create_new_page.clear()
         self.create_new_page.hide()
         self.create_new_page.ok_button.clicked.connect(
@@ -145,7 +145,6 @@ class AchievementMenuPage(QWidget):
             # And then delete it
             delete()
         new_achievement_button.complete_button.clicked.connect(lambda: complete(new_achievement_button.achievement_info))
-        new_achievement_button.delete_button.clicked.connect(delete)
         # Add to button list
         self.in_progress_achievement_buttons.append(new_achievement_button)
         # Insert button in the layout

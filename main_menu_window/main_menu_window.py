@@ -24,20 +24,20 @@ class MainWindow(QMainWindow):
         self.menu_label = QLabel("Menu", self)
         self.menu_label.setStyleSheet("""font-size: 28pt; color: #cfcfcf;""")
         self.menu_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
-        self.menu_label.move(90, 30)
+        self.menu_label.move(82, 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
         self.h_line.setStyleSheet("""border: 1px solid #cfcfcf;""")
-        self.h_line.resize(self.width()-20, 1)
-        self.h_line.move(10, 62)
+        self.h_line.resize(self.width(), 1)
+        self.h_line.move(0, 62)
         # --- Tool Buttons
         # ------ Container for tool buttons layout
         self.tb_container = QWidget(self.background)
         self.tb_container.resize(self.width(), 280)
-        self.tb_container.move(0, 73)
+        self.tb_container.move(0, 60)
         # ------ Layout for tool buttons
         self.tb_layout = QVBoxLayout()
-        self.tb_layout.setContentsMargins(14, 0, 14, 0)
+        self.tb_layout.setContentsMargins(0, 0, 0, 0)     # 14, 0, 14, 0
         self.tb_layout.setSpacing(6)
         # ------ Tool buttons
         self.menu_buttons = {
@@ -56,11 +56,11 @@ class MainWindow(QMainWindow):
         # --- Other Tools
         # ------ Setting button
         self.setting_button = QToolButton(self.background)
-        self.setting_button.move(10, 366)
+        self.setting_button.move(10, self.height()-34)
         self.setting_button.clicked.connect(self.setting_button.hide)
         # ------ User button
         self.user_button = QToolButton(self.background)
-        self.user_button.move(224, 366)
+        self.user_button.move(204, self.height()-34)
         # Pages
         # --- Achievement Menu Page
         self.achievement_menu = AchievementMenuPage(self)

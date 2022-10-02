@@ -10,8 +10,7 @@ class CreateNewButtonWidget(QPushButton):
             QPushButton {
                 border: 1px solid #676d75;
                 color: rgba(255, 255, 255, 100);
-                border-radius: 3px; 
-                height: 31px;
+                height: 34px;
                 font-size: 20pt;
                 text-align: center;
                 padding: 8px;
@@ -19,6 +18,5 @@ class CreateNewButtonWidget(QPushButton):
             QPushButton::hover {
                 border: 5px solid #585d64;
                 background-color: #555a61;
-                border-radius: 3px; 
             }
         """)

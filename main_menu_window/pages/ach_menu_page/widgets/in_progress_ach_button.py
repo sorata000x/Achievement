@@ -8,25 +8,45 @@ class InProgressAchievementButton(QPushButton):
     def __init__(self, title="", summary="", description="", parent=None):
         super().__init__(parent)
         # Config
-        self.setObjectName("current_achievement_button")
+        self.setStyleSheet("""
+            QPushButton {
+                border: none;
+                background-color: black;
+                height: 34px;
+                text-align: left;
+                padding: 8px;
+            }
+        """)
         # Element
         # --- Progress
         self.progress_bar = self.ProgressBar(self)
         self.progress_bar.valueChanged.connect(self.checkStatus)    # check if achievement completed
         # --- Icon
         self.icon = QToolButton(self)
+        self.icon.setStyleSheet("""
+            background-color: black;
+            border: none;
+        """)
+        self.icon.setContentsMargins(0, 0, 0, 0)
+        self.icon.resize(QSize(38, 38))
         self.icon.setIcon(QIcon("images/trophy_icon.png"))
-        self.icon.setObjectName("icon")
-        self.icon.setIconSize(QSize(30, 30))
-        self.icon.resize(36, 36)
+        self.icon.setIconSize(QSize(28, 28))
         self.icon.move(6, 7)
         # --- Title
         self._title = QLabel(title, self)
-        self._title.setObjectName("current_achievement_button_title")
-        self._title.move(48, 6)
+        self._title.setStyleSheet("""
+            background-color: transparent;
+            color: white;
+            font-size: 16pt;
+        """)
+        self._title.move(48, 8)
         # --- Summary
         self._summary = QLabel(summary, self)
-        self._summary.setObjectName("current_achievement_button_summary")
+        self._summary.setStyleSheet("""
+            background-color: transparent;
+            color: white;
+            font-size: 12pt;
+        """)
         self._summary.move(48, 28)
         # --- Description
         self._description = description
@@ -36,10 +56,6 @@ class InProgressAchievementButton(QPushButton):
         self.complete_button.resize(30, 30)
         #   position is set in the resize event
         self.complete_button.hide()
-        # --- Delete Button
-        self.delete_button = QToolButton(self)
-        self.delete_button.setText('✕')
-        self.delete_button.resize(16, 16)
         #   position is set in the resize event
         # Achievement Data
         self.achievement_info = AchievementInfo(title, summary, description, progress=0)
@@ -85,7 +101,6 @@ class InProgressAchievementButton(QPushButton):
             int(self.width() - self.complete_button.width() - 17),
             int(self.height() / 2 - self.complete_button.height() / 2)
         )
-        self.delete_button.move(int(self.width() - self.delete_button.width()), 0)
         self.progress_bar.resize(self.width(), self.height())
 
     # Function
@@ -107,15 +122,12 @@ class InProgressAchievementButton(QPushButton):
                     text-align: center;
                     border: 0;
                     background-color: #202429;
-                    border-radius: 3px;
                 }
                 QProgressBar:hover {
                     border: 3px solid rgba(84, 116, 156, 200);
                 }
                 QProgressBar::chunk {
                     background-color: #344f6e;
-                    border-top-left-radius: 3px;
-                    border-bottom-left-radius: 3px;
                 }
             """
             self.setStyleSheet(self.basic_stylesheet)
@@ -123,17 +135,3 @@ class InProgressAchievementButton(QPushButton):
             self.move(0, 0)
             self.setMinimum(0)
             self.setMaximum(10)
-
-        def setValue(self, p_int):
-            super().setValue(p_int)
-            if p_int > self.maximum() * (99 / 100):
-                self.setStyleSheet(self.basic_stylesheet + """
-                    QProgressBar::chunk {
-                        border-radius: 5px;
-                    }""")
-            else:
-                self.setStyleSheet(self.basic_stylesheet + """
-                    QProgressBar::chunk {
-                        border-top-left-radius: 5px;
-                        border-bottom-left-radius: 5px;
-                    }""")
