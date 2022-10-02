@@ -5,20 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f46db52-1aa7-4d1d-95db-adfe6842c389" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/images/trash_bin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/widgets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/widgets/delete_confirm_box.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/DevLog.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/ach_collection_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/ach_collection_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stylesheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

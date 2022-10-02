@@ -4,12 +4,14 @@ from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPushButton, 
     QLineEdit, QTextEdit, QButtonGroup
 
 from main_menu_window.config import *
+from .widgets.delete_confirm_box import DeleteConfirmBox
 from ..data.achievement_info import AchievementInfo
 
 
 class InProgressAchievementInfoPage(QWidget):
     """ Note: Please set info from target achievement button before open. """
-    closed = pyqtSignal()
+    closed = pyqtSignal()       # page closed
+    deleted = pyqtSignal()      # deleted the corresponding achievement, not the page.
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -36,6 +38,16 @@ class InProgressAchievementInfoPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Delete Button (not implemented)
         self.delete_button = QToolButton(self)
+        self.delete_button.setStyleSheet("""
+                    QToolButton {
+                        background-color: transparent;
+                    }
+                    QToolButton::hover {
+                        background-color: rgba(255, 255, 255, 50)
+                    }
+                """)
+        self.delete_button.setIcon(QIcon("images/trash_bin.png"))
+        self.delete_button.setIconSize(QSize(24, 24))
         self.delete_button.resize(30, 30)
         self.delete_button.move(170, 10)
         # --- Edit Button (not implemented)
@@ -112,14 +124,17 @@ class InProgressAchievementInfoPage(QWidget):
         self.description_entry.move(14, 294)
         # ------------ add to entry group
         self.entry_group.addEntry(self.description_entry)
+        # --- Deletion Confirm Message Box
+        self.deletion_confirm_box = DeleteConfirmBox(self)
+        self.deletion_confirm_box.move(
+            int(self.width() / 2 - self.deletion_confirm_box.width() / 2),
+            int(self.height() / 2 - self.deletion_confirm_box.height() / 2)
+        )
+        self.deletion_confirm_box.hide()
+        self.delete_button.clicked.connect(self.deletion_confirm_box.show)
+        self.deletion_confirm_box.delete_button.clicked.connect(self.deleted.emit)
 
-    def hide(self) -> None:
-        super().hide()
-        self.closed.emit()
-
-    def mousePressEvent(self, event):
-        super().mousePressEvent(event)
-        self.entry_group.disableAll()
+    # Page Function
 
     def setInfo(self, achievement_info):
         self.achievement_info = achievement_info
@@ -134,6 +149,16 @@ class InProgressAchievementInfoPage(QWidget):
         # description entry
         self.description_entry.setPlainText(achievement_info.description())
         self.description_entry.setTarget(achievement_info)
+
+    # Events
+
+    def hide(self) -> None:
+        super().hide()
+        self.closed.emit()
+
+    def mousePressEvent(self, event):
+        super().mousePressEvent(event)
+        self.entry_group.disableAll()
 
     def paintEvent(self, pe):
         o = QStyleOption()

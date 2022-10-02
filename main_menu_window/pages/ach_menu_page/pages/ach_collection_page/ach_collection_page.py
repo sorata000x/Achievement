@@ -1,15 +1,12 @@
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QWidget, QLabel, QToolButton, QGridLayout, QScrollArea, QPushButton, QSpacerItem, \
-    QSizePolicy, QHBoxLayout, QVBoxLayout
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QLabel, QScrollArea, QPushButton, QHBoxLayout, QVBoxLayout, QMessageBox
+
 from main_menu_window.config import *
 from main_menu_window.functions import getFont
-from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
-from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import InProgressAchievementInfoPage
 from main_menu_window.widgets.h_line import QHLine
 from .achievement_collection_button import AchievementCollectionButton
-from .achievement_info import AchievementInfo
 from .achievement_info_page import AchievementInfoPage
+
 
 class AchievementCollectionPage(QWidget):
     def __init__(self, parent=None):
@@ -18,6 +15,9 @@ class AchievementCollectionPage(QWidget):
         self.setWindowFlags(self.windowFlags() | Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)  # set background transparent
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
+        # Properties
+        self.achievement_buttons = []   # list of available achievement buttons
+        self.current_achievement_button = AchievementCollectionButton()     # current button with the info page
         # Elements
         # --- Background
         self.background = QWidget(self)
@@ -68,38 +68,28 @@ class AchievementCollectionPage(QWidget):
         self.acb_inner_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.acb_inner_layout.setContentsMargins(8, 8, 8, 8)
         self.acb_inner_container.setLayout(self.acb_inner_layout)
-
-        """
-        self.acb_layout = QGridLayout()
-        spacerItem = QSpacerItem(   # row spacing
-            20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
-        )  # QSpacerItem(w, h[, hData=QSizePolicy.Minimum[, vData=QSizePolicy.Minimum]])¶
-        self.acb_layout.addItem(spacerItem, 1, 0, 1, 1)
-        spacerItem1 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)  # column spacing
-        self.acb_layout.addItem(spacerItem1, 1, 1, 1, 1)
-        """
-# TESTING
-        if False:
-            for i in range(5):
-                for j in range(4):
-                    self.acb_inner_layout.addWidget(self.AchievementCollectionButton(), i, j)
-# -------
-        #self.acb_container.setLayout(self.acb_inner_layout)
-
-        self.achievement_buttons = []
-
         # Page
         self.achievement_info_page = AchievementInfoPage(self)
+        self.achievement_info_page.deleted.connect(self.deleteCurrentAchievementButton)
         self.achievement_info_page.hide()
 
-    def addAchievement(self, title, summary, description):
+    def deleteCurrentAchievementButton(self):
+        # Remove from the window
+        self.acb_inner_layout.removeWidget(self.current_achievement_button)
+        self.current_achievement_button.deleteLater()
+        # Remove property
+        self.achievement_buttons.remove(self.current_achievement_button)
+        # Close the page
+        self.achievement_info_page.hide()
+
+    def addAchievement(self, achievement_info):
         new_acb = AchievementCollectionButton()
         self.achievement_buttons.append(new_acb)    # Store to button list
         self.acb_inner_layout.addWidget(new_acb)    # Display in button layout
         # Connect button to open info page
         def openCurrentAchievementInfoPage():
-            self.achievement_info_page.setInfo(title, summary, description)
+            self.current_achievement_button = new_acb
+            self.achievement_info_page.setInfo(achievement_info)
             self.achievement_info_page.show()
         new_acb.clicked.connect(openCurrentAchievementInfoPage)
-
 

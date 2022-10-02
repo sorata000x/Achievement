@@ -88,11 +88,7 @@ StyleSheet = """
         border: 0;
     }
     
-    #current_achievement_info_page {
-        background-color: white;
-        border-radius: 5px; 
-        padding: 8px;
-    }
+    
     
     
     

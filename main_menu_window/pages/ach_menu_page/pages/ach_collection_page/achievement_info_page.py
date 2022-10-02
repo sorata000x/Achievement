@@ -1,20 +1,21 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint, pyqtSignal
 from PyQt6.QtGui import QIcon, QPainter
-from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QPlainTextEdit, QPushButton, QStyleOption, QStyle
+from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QPlainTextEdit, QPushButton, QStyleOption, QStyle, QMessageBox
 
 from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.achievement_collection_button import \
     AchievementCollectionButton
+from main_menu_window.pages.ach_menu_page.pages.widgets.delete_confirm_box import DeleteConfirmBox
+from ...data.achievement_info import AchievementInfo
 
 
 class AchievementInfoPage(QWidget):
+    deleted = pyqtSignal()      # deleted the corresponding achievement, not the page.
+
     def __init__(self, parent=None):
         super().__init__(parent)
         # Config
-        self.setObjectName("current_achievement_info_page")
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
-        # Target Achievement Button
-        self.achievement_button = AchievementCollectionButton()    # corresponding achievement button of the info
         # Animation
         self.sliding_page_anim = QPropertyAnimation(self, b"pos")
         self.sliding_page_anim.setEasingCurve(QEasingCurve.Type.OutCurve)
@@ -26,7 +27,7 @@ class AchievementInfoPage(QWidget):
         # --- Back Button
         self.back_button = QPushButton("< Back", self)
         self.back_button.setObjectName("back_button")
-        self.back_button.resize(50, 20)
+        self.back_button.resize(70, 30)
         self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
         # --- Delete Button (not implemented)
@@ -87,14 +88,22 @@ class AchievementInfoPage(QWidget):
         self.description_field.setContentsMargins(0, 0, 0, 0)
         self.description_field.resize(226, 96)
         self.description_field.move(10, 240)
+        # --- Deletion Confirm Message Box
+        self.deletion_confirm_box = DeleteConfirmBox(self)
+        self.deletion_confirm_box.move(
+            int(self.width()/2-self.deletion_confirm_box.width()/2),
+            int(self.height()/2-self.deletion_confirm_box.height()/2)
+        )
+        self.deletion_confirm_box.hide()
+        self.delete_button.clicked.connect(self.deletion_confirm_box.show)
+        self.deletion_confirm_box.delete_button.clicked.connect(self.deleted.emit)
 
-    def setInfo(self, title, summary, description):
-        self.title_text.setText(title)
+    def setInfo(self, achievement_info):
+        self.title_text.setText(achievement_info.title())
         self.title_text.adjustSize()
-        self.summary_text.setText(summary)
+        self.summary_text.setText(achievement_info.summary())
         self.summary_text.adjustSize()
-        self.description_field.setPlainText(description)
-        #self.achievement_button = achievement_button
+        self.description_field.setPlainText(achievement_info.description())
 
     def paintEvent(self, pe):
         o = QStyleOption()
@@ -103,11 +112,13 @@ class AchievementInfoPage(QWidget):
         self.style().drawPrimitive(QStyle.PrimitiveElement.PE_Widget, o, p, self)
 
     def sliding_page_in(self):
+        """ NOT IN USE """
         self.sliding_page_anim.setDuration(300)
         self.sliding_page_anim.setEndValue(QPoint(0, 0))
         self.sliding_page_anim.start()
 
     def sliding_page_out(self):
+        """ NOT IN USE """
         self.sliding_page_anim.setDuration(100)
         self.sliding_page_anim.setEndValue(QPoint(self.width(), 0))
         self.sliding_page_anim.start()

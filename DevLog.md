@@ -7,6 +7,9 @@ buttons, which I am not sure what I was trying to do.
 Anyhow, I solved the problem by implementing the achievement info class which I think
 is a clearer way to pass information between the button and the page, and it works 
 pretty well.
+Doing:
+    - Create a deletion confirm page
+
 
 09/19/22
 

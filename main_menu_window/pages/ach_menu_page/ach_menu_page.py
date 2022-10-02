@@ -1,21 +1,25 @@
-from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QPoint
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QPushButton, QScrollArea, QVBoxLayout, QLabel
 
+from main_menu_window.config import *
 from main_menu_window.functions import getFont
+from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.ach_collection_page import AchievementCollectionPage
 from main_menu_window.pages.ach_menu_page.pages.create_new_page import CreateNewPage
 from main_menu_window.pages.ach_menu_page.pages.in_progress_ach_info_page import InProgressAchievementInfoPage
-from main_menu_window.config import *
 from main_menu_window.pages.ach_menu_page.widgets.in_progress_ach_button import InProgressAchievementButton
+from main_menu_window.widgets.create_new_button import CreateNewButtonWidget
 from main_menu_window.widgets.h_line import QHLine
 from main_menu_window.widgets.menu_button import MenuButtonWidget
-from main_menu_window.widgets.create_new_button import CreateNewButtonWidget
-from main_menu_window.pages.ach_menu_page.pages.ach_collection_page.ach_collection_page import AchievementCollectionPage
+
 
 class AchievementMenuPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Config
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
+        # Properties
+        self.in_progress_achievement_buttons = []   # list of available achievement buttons
+        self.current_achievement_button = InProgressAchievementButton()     # current button with the info page
         # Elements
         # --- Background
         self.background = QWidget(self)
@@ -68,8 +72,6 @@ class AchievementMenuPage(QWidget):
         # --------- Create New Button: always at bottom
         self.create_new_button = CreateNewButtonWidget()
         self.cab_layout.addWidget(self.create_new_button)
-        # --------- Current Achievement Buttons
-        self.current_achievement_buttons = []
         # Pages
         # --- Create-New Page
         self.create_new_page = CreateNewPage(self)
@@ -86,13 +88,18 @@ class AchievementMenuPage(QWidget):
         # --- Current Achievement Info Page
         self.in_progress_achievement_info_page = InProgressAchievementInfoPage(self)
         self.in_progress_achievement_info_page.hide()
+        self.in_progress_achievement_info_page.deleted.connect(self.deleteCurrentAchievementButton)
+            # delete the current achievement button if deletion occur in the info page
         # --- Achievement Collection Page
         self.ach_collection_page = AchievementCollectionPage(self)
         self.ach_collection_page.hide()
         self.achievement_collection_button.clicked.connect(self.ach_collection_page.show)
 
+        # DEBUG
         if debug:
             self.create_new_achievement("Title", "Summary", "Description")
+
+    # Page Function
 
     def move(self, x, y):
         """ Move sub-main_menu_window as well."""
@@ -104,35 +111,45 @@ class AchievementMenuPage(QWidget):
         #if event.key() == Qt.Key.Key_Return:
         #    self.create_new_achievement()
 
-    def showInProgressAchievementPage(self, achievement_info):
-        self.in_progress_achievement_info_page.setInfo(achievement_info)
-        self.in_progress_achievement_info_page.show()
+    # Element Function
+
+    def deleteCurrentAchievementButton(self):
+        # Remove from the window
+        self.cab_layout.removeWidget(self.current_achievement_button)
+        self.current_achievement_button.deleteLater()
+        # Remove property
+        self.in_progress_achievement_buttons.remove(self.current_achievement_button)
+        # Close the page
+        self.in_progress_achievement_info_page.hide()
 
     def create_new_achievement(self, title, summary, description):
         # Create achievement button
         new_achievement_button = InProgressAchievementButton(title, summary, description)   # create a new button
+        def openInProgressAchievementPage(achievement_info):
+            self.current_achievement_button = new_achievement_button    # set the current achievement button
+            self.in_progress_achievement_info_page.setInfo(achievement_info)    # set the info to the page
+            self.in_progress_achievement_info_page.show()   # open the page
         new_achievement_button.clicked.connect(
-            lambda: self.showInProgressAchievementPage(new_achievement_button.achievement_info))
+            lambda: openInProgressAchievementPage(new_achievement_button.achievement_info))
         # Connect complete function to achievement completed.
         def delete():
-            # Remove achievement button from menu
+            # Remove from the window
             self.cab_layout.removeWidget(new_achievement_button)
             new_achievement_button.deleteLater()
-            self.current_achievement_buttons.remove(new_achievement_button)
-        def complete(achievement):
+            # Remove the property
+            self.in_progress_achievement_buttons.remove(new_achievement_button)
+        def complete(achievement_info):
             """ Triggered after achievement marked complete. """
             # Add achievement to collection page
-            self.ach_collection_page.addAchievement(
-                achievement.title(), achievement.summary(), achievement.description())
+            self.ach_collection_page.addAchievement(achievement_info)
             # And then delete it
             delete()
         new_achievement_button.complete_button.clicked.connect(lambda: complete(new_achievement_button.achievement_info))
         new_achievement_button.delete_button.clicked.connect(delete)
         # Add to button list
-        self.current_achievement_buttons.append(new_achievement_button)
+        self.in_progress_achievement_buttons.append(new_achievement_button)
         # Insert button in the layout
         last_index = self.cab_layout.indexOf(self.create_new_button)
         self.cab_layout.insertWidget(last_index, new_achievement_button)
         self.create_new_page.clear()
         self.create_new_page.hide()
-
