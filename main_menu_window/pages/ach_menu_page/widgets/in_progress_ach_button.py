@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QPushButton, QLabel, QToolButton, QProgressBar
 from ..data.achievement_info import AchievementInfo
 
 class InProgressAchievementButton(QPushButton):
-    def __init__(self, title="", summary="", description="", parent=None):
+    def __init__(self, achievement_info=AchievementInfo(), parent=None):
         super().__init__(parent)
         # Config
         self.setStyleSheet("""
@@ -29,11 +29,11 @@ class InProgressAchievementButton(QPushButton):
         """)
         self.icon.setContentsMargins(0, 0, 0, 0)
         self.icon.resize(QSize(38, 38))
-        self.icon.setIcon(QIcon("images/trophy_icon.png"))
+        self.icon.setIcon(QIcon(achievement_info.image()))
         self.icon.setIconSize(QSize(28, 28))
         self.icon.move(6, 7)
         # --- Title
-        self._title = QLabel(title, self)
+        self._title = QLabel(achievement_info.title(), self)
         self._title.setStyleSheet("""
             background-color: transparent;
             color: white;
@@ -41,7 +41,7 @@ class InProgressAchievementButton(QPushButton):
         """)
         self._title.move(48, 8)
         # --- Summary
-        self._summary = QLabel(summary, self)
+        self._summary = QLabel(achievement_info.summary(), self)
         self._summary.setStyleSheet("""
             background-color: transparent;
             color: white;
@@ -49,7 +49,7 @@ class InProgressAchievementButton(QPushButton):
         """)
         self._summary.move(48, 28)
         # --- Description
-        self._description = description
+        self._description = achievement_info.description()
         # --- Complete Button
         self.complete_button = QToolButton(self)
         self.complete_button.setIcon(QIcon("images/checkmark.png"))
@@ -58,7 +58,7 @@ class InProgressAchievementButton(QPushButton):
         self.complete_button.hide()
         #   position is set in the resize event
         # Achievement Data
-        self.achievement_info = AchievementInfo(title, summary, description, progress=0)
+        self.achievement_info = achievement_info
         self.achievement_info.changed.connect(lambda: self.setInfo(self.achievement_info))
 
     # MUTATOR

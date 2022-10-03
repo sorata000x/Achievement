@@ -2,6 +2,14 @@
 
 Gotta be real careful with the stylesheet, since the widgets inherit their parent's
 stylesheet if I don't specify the properties.
+Today I am implementing function to upload image for the achievement.
+I feel I spent more time I should on the project this week, consider I have tones
+of preparation to do for the classes next week.
+It is like a difficult relationship, I want to be with my program every single
+moment, but I had to distance myself from her until to do what I have to do.
+Anyway, I think I should make a template for dev log, like the research log I 
+am doing, to fill up the goal of the day, what I am still working on, what I have
+done, and what I want to do next time.
 
 10/01/22
 

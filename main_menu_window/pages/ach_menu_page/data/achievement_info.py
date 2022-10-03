@@ -4,14 +4,18 @@ from PyQt6.QtCore import pyqtSignal, QObject
 class AchievementInfo(QObject):
     changed = pyqtSignal()
 
-    def __init__(self, title="", summary="", description="", progress=0):
+    def __init__(self, image="images/trophy_icon.png", title="", summary="", description="", progress=0):
         super().__init__()
+        self._image = image
         self._title = title
         self._summary = summary
         self._description = description
         self._progress = progress
 
     # ACCESSOR
+
+    def image(self):
+        return self._image
 
     def title(self):
         return self._title
@@ -26,6 +30,16 @@ class AchievementInfo(QObject):
         return self._progress
 
     # MUTATOR
+
+    def setInfo(self, new_image, new_title, new_summary, new_description):
+        self._image = new_image
+        self._title = new_title
+        self._summary = new_summary
+        self._description = new_description
+
+    def setImage(self, new_image: str):
+        self._image = new_image
+        self.changed.emit()     # emit changed signal
 
     def setTitle(self, new_title: str):
         self._title = new_title
