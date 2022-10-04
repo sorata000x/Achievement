@@ -1,5 +1,5 @@
 from PyQt6.QtCore import QSize
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtWidgets import QPushButton, QLabel, QToolButton, QProgressBar
 
 from ..data.achievement_info import AchievementInfo
@@ -11,16 +11,13 @@ class InProgressAchievementButton(QPushButton):
         self.setStyleSheet("""
             QPushButton {
                 border: none;
-                background-color: black;
+                background-color: #202429;
                 height: 34px;
                 text-align: left;
                 padding: 8px;
             }
         """)
         # Element
-        # --- Progress
-        self.progress_bar = self.ProgressBar(self)
-        self.progress_bar.valueChanged.connect(self.checkStatus)    # check if achievement completed
         # --- Icon
         self.icon = QToolButton(self)
         self.icon.setStyleSheet("""
@@ -30,8 +27,9 @@ class InProgressAchievementButton(QPushButton):
         self.icon.setContentsMargins(0, 0, 0, 0)
         self.icon.resize(QSize(38, 38))
         self.icon.setIcon(QIcon(achievement_info.image()))
-        self.icon.setIconSize(QSize(28, 28))
+        self.icon.setIconSize(QSize(34, 34))
         self.icon.move(6, 7)
+        self.icon.clicked.connect(self.clicked.emit)
         # --- Title
         self._title = QLabel(achievement_info.title(), self)
         self._title.setStyleSheet("""
@@ -50,6 +48,9 @@ class InProgressAchievementButton(QPushButton):
         self._summary.move(48, 28)
         # --- Description
         self._description = achievement_info.description()
+        # --- Progress
+        self.progress_bar = self.ProgressBar(self)
+        self.progress_bar.valueChanged.connect(self.checkStatus)  # check if achievement completed
         # --- Complete Button
         self.complete_button = QToolButton(self)
         self.complete_button.setIcon(QIcon("images/checkmark.png"))
@@ -121,7 +122,7 @@ class InProgressAchievementButton(QPushButton):
                 QProgressBar {
                     text-align: center;
                     border: 0;
-                    background-color: #202429;
+                    background-color: transparent;
                 }
                 QProgressBar:hover {
                     border: 3px solid rgba(84, 116, 156, 200);

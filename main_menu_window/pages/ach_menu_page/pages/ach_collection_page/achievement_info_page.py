@@ -35,6 +35,7 @@ class AchievementInfoPage(QWidget):
         self.delete_button.setStyleSheet("""
             QToolButton {
                 background-color: transparent;
+                border-radius: 1px;
             }
             QToolButton::hover {
                 background-color: rgba(255, 255, 255, 50)
@@ -43,14 +44,10 @@ class AchievementInfoPage(QWidget):
         self.delete_button.setIcon(QIcon("images/trash_bin.png"))
         self.delete_button.setIconSize(QSize(24, 24))
         self.delete_button.resize(30, 30)
-        self.delete_button.move(170, 10)
-        # --- Edit Button (not implemented)
-        self.edit_button = QToolButton(self)
-        self.edit_button.resize(30, 30)
-        self.edit_button.move(210, 10)
+        self.delete_button.move(200, 10)
         # --- Icon
         self.icon = QToolButton(self)
-        self.icon.setIcon(QIcon("images/trophy_icon.png"))
+        self.icon.setIcon(QIcon("images/trophy.png"))
         self.icon.setObjectName("icon")
         self.icon.setIconSize(QSize(60, 60))
         self.icon.resize(60, 60)

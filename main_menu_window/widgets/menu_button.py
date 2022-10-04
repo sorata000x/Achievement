@@ -1,6 +1,7 @@
 from PyQt6.QtCore import QSize, Qt, QEvent, QPropertyAnimation
-from PyQt6.QtGui import QIcon, QCursor, QColor
-from PyQt6.QtWidgets import QPushButton, QLabel, QGraphicsDropShadowEffect, QGraphicsColorizeEffect, QWidget
+from PyQt6.QtGui import QIcon, QCursor, QColor, QPixmap
+from PyQt6.QtWidgets import QPushButton, QLabel, QGraphicsDropShadowEffect, QGraphicsColorizeEffect, QWidget, \
+    QToolButton
 
 from main_menu_window.animation import Animation
 from main_menu_window.widgets.toggle import ToggleWidget
@@ -30,10 +31,14 @@ class MenuButtonWidget(QPushButton):
         self.title = QLabel(title, self)
         self.title.setFont(getFont('LeagueGothic-Regular.otf'))
         self.title.setStyleSheet("""color: #d6d6d6;""")
-        self.title.move(43, 6)
+        self.title.move(46, 5)
         # --- Icon
-        self.setIcon(QIcon("images/trophy_icon.png"))
-        self.setIconSize(QSize(28, 28))
+        self.icon = QToolButton(self)
+        self.icon.setStyleSheet("""background-color: transparent; border: none;""")
+        self.icon.setIcon(QIcon("images/trophy.png"))
+        self.icon.setIconSize(QSize(34, 34))
+        self.icon.move(6, int(self.height()/2-18))
+        self.icon.clicked.connect(self.clicked.emit)
         # --- Toggle
         if has_toggle:
             self.toggle = ToggleWidget(self)

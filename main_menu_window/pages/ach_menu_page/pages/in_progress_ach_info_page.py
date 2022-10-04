@@ -39,57 +39,56 @@ class InProgressAchievementInfoPage(QWidget):
         # --- Delete Button (not implemented)
         self.delete_button = QToolButton(self)
         self.delete_button.setStyleSheet("""
-                    QToolButton {
-                        background-color: transparent;
-                    }
-                    QToolButton::hover {
-                        background-color: rgba(255, 255, 255, 50)
-                    }
-                """)
+            QToolButton {
+                background-color: transparent;
+                border-radius: 1px;
+            }
+            QToolButton::hover {
+                background-color: rgba(255, 255, 255, 50)
+            }
+        """)
         self.delete_button.setIcon(QIcon("images/trash_bin.png"))
-        self.delete_button.setIconSize(QSize(24, 24))
+        self.delete_button.setIconSize(QSize(20, 20))
         self.delete_button.resize(30, 30)
-        self.delete_button.move(170, 10)
-        # --- Edit Button (not implemented)
-        self.edit_button = QToolButton(self)
-        self.edit_button.setStyleSheet("""background: transparent;""")
-        self.edit_button.resize(26, 26)
-        self.edit_button.setIcon(QIcon("images/edit.png"))
-        self.edit_button.setIconSize(QSize(26, 26))
-        self.edit_button.move(210, 10)
+        self.delete_button.move(200, 10)
         # --- Info
+        self.page_title = QLabel(self)
+        self.page_title.setStyleSheet("""font-size: 14pt;""")
+        self.page_title.setText("Achievement Info")
+        self.page_title.move(62, 6)
         # ------ Icon
         self.icon = QToolButton(self)
-        self.icon.setIcon(QIcon("images/trophy_icon.png"))
+        self.icon.setStyleSheet("""background-color: black;""")
+        self.icon.setIcon(QIcon("images/trophy.png"))
         self.icon.setObjectName("icon")
         self.icon.setIconSize(QSize(60, 60))
         self.icon.resize(60, 60)
-        self.icon.move(10, 50)
+        self.icon.move(10, 42)
         # ------ Title
         # --------- Label
         self.title_label = QLabel("TITLE", self)
         self.title_label.setStyleSheet("""font-weight: bold;""")
-        self.title_label.move(10, 124)
+        self.title_label.move(11, 116)
         # --------- Entry
         self.title_entry = TitleLineEdit(self)
-        self.title_entry.move(14, 144)
+        self.title_entry.move(14, 136)
         # ------------ add to entry group
         self.entry_group.addEntry(self.title_entry)
         # ------ Summary
         # --------- Label
         self.summary_label = QLabel("SUMMARY", self)
         self.summary_label.setStyleSheet("""font-weight: bold;""")
-        self.summary_label.move(10, 174)
+        self.summary_label.move(11, 166)
         # --------- Entry
         self.summary_entry = SummaryLineEdit(self)
-        self.summary_entry.move(14, 194)
+        self.summary_entry.move(14, 186)
         # ------------ add to entry group
         self.entry_group.addEntry(self.summary_entry)
         # ------ Progress
         # --------- Label
         self.progress_label = QLabel("PROGRESS", self)
         self.progress_label.setStyleSheet("""font-weight: bold;""")
-        self.progress_label.move(10, 224)
+        self.progress_label.move(11, 216)
         # --------- Bar
         self.progress_bar = QSlider(Qt.Orientation.Horizontal, self)
         self.progress_bar.setStyleSheet("""
@@ -109,19 +108,19 @@ class InProgressAchievementInfoPage(QWidget):
         """)
         self.progress_bar.setMinimum(0)
         self.progress_bar.setMaximum(10)
-        self.progress_bar.setFixedWidth(220)
+        self.progress_bar.setFixedWidth(self.width()-40)
         self.progress_bar.valueChanged.connect(
             lambda: self.achievement_info.setProgress(self.progress_bar.value()))
-        self.progress_bar.move(20, 244)
+        self.progress_bar.move(20, 236)
         # ------ Description
         # --------- Label
         self.description_label = QLabel("DESCRIPTION", self)
         self.description_label.setStyleSheet("""font-weight: bold;""")
-        self.description_label.move(10, 274)
+        self.description_label.move(11, 266)
         # --------- Entry
         self.description_entry = DescriptionTextEdit(self)
         self.description_entry.resize(226, 96)
-        self.description_entry.move(14, 294)
+        self.description_entry.move(14, 286)
         # ------------ add to entry group
         self.entry_group.addEntry(self.description_entry)
         # --- Deletion Confirm Message Box

@@ -1,5 +1,5 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint, pyqtSignal
-from PyQt6.QtGui import QIcon, QFontMetricsF
+from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint, pyqtSignal, QRect, Qt
+from PyQt6.QtGui import QIcon, QFontMetricsF, QImage, QPixmap, QBrush, QPainter, QWindow
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QFileDialog
 
 from main_menu_window.config import *
@@ -14,7 +14,7 @@ class CreateAchievementPage(QWidget):
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         # Property
         self.achievement_info = AchievementInfo()
-        self._image = "images/trophy_icon.png"
+        self._image = "images/trophy.png"
         self._title = ""
         self._summary = ""
         self._description = ""
@@ -30,13 +30,13 @@ class CreateAchievementPage(QWidget):
         self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
         # --- Create Achievement Label
-        self.create_achievement = QLabel(self)
-        self.create_achievement.setText("Create Achievement")
-        self.create_achievement.setStyleSheet("""
-            color: white;
+        self.page_title = QLabel(self)
+        self.page_title.setText("Create Achievement")
+        self.page_title.setStyleSheet("""
+            color: #adb1b8;
             font-size: 14pt;
         """)
-        self.create_achievement.move(60, 4)
+        self.page_title.move(60, 4)
         # --- Image Upload Button
         self.image_upload_button = QToolButton(self.background)
         self.image_upload_button.setStyleSheet("""
@@ -53,16 +53,21 @@ class CreateAchievementPage(QWidget):
         self.image_upload_button.resize(QSize(60, 60))
         self.image_upload_button.setIcon(QIcon("images/image_upload_icon.png"))
         self.image_upload_button.setIconSize(QSize(26, 26))
-        self.image_upload_button.move(10, 36)
+        self.image_upload_button.move(10, 34)
         # --- Title Entry
         # ------ label
         self.title_label = QLabel("TITLE", self.background)
+        self.title_label.setStyleSheet("""
+            color: white;
+            font-weight: bold;
+        """)
         self.title_label.move(10, 104)
         # ------ entry
         self.title_entry = QLineEdit(self.background)
         self.title_entry.setStyleSheet("""
             background-color: #2b2b2b; 
-            border: 0; border-radius: 2px; 
+            border: 0; 
+            border-radius: 2px; 
             padding: 2px; 
             color: white;
         """)
@@ -73,6 +78,10 @@ class CreateAchievementPage(QWidget):
         # --- Summary Entry
         # ------- label
         self.summary_label = QLabel("SUMMARY", self.background)
+        self.summary_label.setStyleSheet("""
+            color: white;
+            font-weight: bold;
+        """)
         self.summary_label.move(10, 154)
         # ------- entry
         self.summary_entry = QLineEdit(self.background)
@@ -89,15 +98,19 @@ class CreateAchievementPage(QWidget):
         # --- Description
         # ------ label
         self.description_label = QLabel("DESCRIPTION", self.background)
+        self.description_label.setStyleSheet("""
+            color: white;
+            font-weight: bold;
+        """)
         self.description_label.move(10, 204)
         # ------ entry
         self.description_entry = QPlainTextEdit(self.background)
         self.description_entry.setStyleSheet("""
-                    background-color: #2b2b2b; 
-                    border: 0; border-radius: 2px; 
-                    padding: 2px; 
-                    color: white;
-                """)
+            background-color: #2b2b2b; 
+            border: 0; border-radius: 2px; 
+            padding: 2px; 
+            color: white;
+        """)
         self.description_entry.setTabStopDistance(
             QFontMetricsF(self.description_entry.font()).horizontalAdvance(' ') * 4)
         self.description_entry.textChanged.connect(
@@ -147,6 +160,38 @@ class CreateAchievementPage(QWidget):
         self._description = new_description
 
     def _setImage(self, new_image):
-        self._image = new_image
-        self.image_upload_button.setIcon(QIcon(new_image))      # reflect uploaded image
+        self._image = mask_image(new_image)
+        self.image_upload_button.setIcon(QIcon(self._image))      # reflect uploaded image
         self.image_upload_button.setIconSize(QSize(60, 60))
+
+def mask_image(imgpath):
+    """
+    Masking image to square. [46]
+    return: pixmap of the squared image.
+    """
+
+    # Load image
+    imgdata = open(imgpath, 'rb').read()
+    image = QImage.fromData(imgdata)
+
+    # convert image to 32-bit ARGB (adds an alpha
+    # channel ie transparency factor)
+    image.convertToFormat(QImage.Format.Format_ARGB32)
+
+    # crop image to a square
+    imgsize = min(image.width(), image.height())
+    rect = QRect(
+        int((image.width() - imgsize) / 2),
+        int((image.height() - imgsize) / 2),
+        imgsize,
+        imgsize,
+    )
+    image = image.copy(rect)
+
+    # Omitted the rest of the original code because
+    # I think those are for scaling the image, so
+    # I probably don't need it since I am using it
+    # as icon.
+
+    return QPixmap(image)
+

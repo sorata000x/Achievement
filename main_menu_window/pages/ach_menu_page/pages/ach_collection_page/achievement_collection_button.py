@@ -11,6 +11,6 @@ class AchievementCollectionButton(QToolButton):
         self.resize(45, 45)
         self.move(10, 60)
         # Icon
-        self.setIcon(QIcon("images/trophy_icon.png"))
+        self.setIcon(QIcon("images/trophy.png"))
         self.setObjectName("icon")
         self.setIconSize(self.size())

@@ -4,7 +4,7 @@ from PyQt6.QtCore import pyqtSignal, QObject
 class AchievementInfo(QObject):
     changed = pyqtSignal()
 
-    def __init__(self, image="images/trophy_icon.png", title="", summary="", description="", progress=0):
+    def __init__(self, image="images/trophy.png", title="", summary="", description="", progress=0):
         super().__init__()
         self._image = image
         self._title = title

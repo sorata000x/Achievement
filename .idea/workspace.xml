@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="9f46db52-1aa7-4d1d-95db-adfe6842c389" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/ach_menu_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/DevLog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/Reference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/trophy_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/trophy.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/data/achievement_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/data/achievement_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_collection_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_collection_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/ach_collection_page/achievement_info_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/create_achievement_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/create_achievement_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/pages/in_progress_ach_info_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/pages/ach_menu_page/widgets/in_progress_ach_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu_window/widgets/menu_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu_window/widgets/menu_button.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

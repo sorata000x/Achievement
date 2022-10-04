@@ -1,3 +1,9 @@
+10/04/22
+
+I had an idea from the research paper I read yesterday that it seems better to 
+cite the reference with number label and also the place where I used the reference,
+so I am going to do that.
+
 10/02/22
 
 Gotta be real careful with the stylesheet, since the widgets inherit their parent's
