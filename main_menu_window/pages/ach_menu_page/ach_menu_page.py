@@ -28,7 +28,16 @@ class AchievementMenuPage(QWidget):
         self.background.setObjectName("panel")
         # --- Back Button
         self.back_button = QPushButton("< Tool menu", self)
-        self.back_button.setObjectName("back_button")
+        self.back_button.setStyleSheet("""
+            QPushButton {
+                background-color: transparent;
+                border: none;
+                color: #437ccc;
+            }
+            QPushButton::hover {
+                color: #7aa6e6;
+            }
+        """)
         self.back_button.resize(80, 20)
         self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
@@ -119,9 +128,6 @@ class AchievementMenuPage(QWidget):
         self.in_progress_achievement_info_page.hide()
 
     def create_new_achievement(self, achievement_info):
-
-        print(f'123: achievement_info: title: {achievement_info.title()}')
-
         # Create achievement button
         new_achievement_button = InProgressAchievementButton(achievement_info)   # create a new button
 
@@ -144,23 +150,12 @@ class AchievementMenuPage(QWidget):
             self.ach_collection_page.addAchievement(achievement_info)
             # And then delete it
             delete()
-
-        print(f'148: new_achievement_button.title(): {new_achievement_button.title()}')
-
         new_achievement_button.complete_button.clicked.connect(
             lambda: complete(new_achievement_button.achievement_info))
         # Add to button list
         self.in_progress_achievement_buttons.append(new_achievement_button)
-
-
-
         # Insert button in the layout
         last_index = self.cab_layout.indexOf(self.create_new_button)
         self.cab_layout.insertWidget(last_index, new_achievement_button)
-
-
         self.create_new_page.clear()
-
         self.create_new_page.hide()
-
-        print(f'155: new_achievement_button.title(): {new_achievement_button.title()}')

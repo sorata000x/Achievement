@@ -1,5 +1,5 @@
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint, pyqtSignal, QRect, Qt
-from PyQt6.QtGui import QIcon, QFontMetricsF, QImage, QPixmap, QBrush, QPainter, QWindow
+from PyQt6.QtCore import QSize, QRect, Qt
+from PyQt6.QtGui import QIcon, QFontMetricsF, QImage, QPainter, QBrush, QPixmap
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QFileDialog
 
 from main_menu_window.config import *
@@ -14,7 +14,7 @@ class CreateAchievementPage(QWidget):
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         # Property
         self.achievement_info = AchievementInfo()
-        self._image = "images/trophy.png"
+        self._image = self.mask_image("images/trophy.png")
         self._title = ""
         self._summary = ""
         self._description = ""
@@ -25,7 +25,16 @@ class CreateAchievementPage(QWidget):
         self.background.resize(self.size())
         # --- Back Button
         self.back_button = QPushButton("< Back", self)
-        self.back_button.setObjectName("back_button")
+        self.back_button.setStyleSheet("""
+            QPushButton {
+                background-color: transparent;
+                border: none;
+                color: #437ccc;
+            }
+            QPushButton::hover {
+                color: #7aa6e6;
+            }
+        """)
         self.back_button.resize(50, 20)
         self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
@@ -122,10 +131,11 @@ class CreateAchievementPage(QWidget):
         self.cancel_button.resize(66, 24)
         self.cancel_button.move(88, 339)
         self.cancel_button.setStyleSheet("""
-                    background-color: #636363;
-                    border-radius: 2px;
-                    color: white;
-                """)
+            background-color: #636363;
+            border-radius: 2px;
+            color: white;
+        """)
+        self.cancel_button.clicked.connect(self.clear)
         self.cancel_button.clicked.connect(self.hide)
         # OK Button
         self.ok_button = QPushButton("OK", self.background)
@@ -160,38 +170,66 @@ class CreateAchievementPage(QWidget):
         self._description = new_description
 
     def _setImage(self, new_image):
-        self._image = mask_image(new_image)
-        self.image_upload_button.setIcon(QIcon(self._image))      # reflect uploaded image
+        try:
+            self._image = self.mask_image(new_image)
+            self.image_upload_button.setIcon(QIcon(self._image))  # reflect uploaded image
+        except FileNotFoundError:
+            self._image = self.mask_image(DEFAULT_IMAGE)
         self.image_upload_button.setIconSize(QSize(60, 60))
 
-def mask_image(imgpath):
-    """
-    Masking image to square. [46]
-    return: pixmap of the squared image.
-    """
+    @staticmethod
+    def mask_image(imgpath):
+        """
+        Masking image to square. [46]
+        return: pixmap of the squared image.
+        """
 
-    # Load image
-    imgdata = open(imgpath, 'rb').read()
-    image = QImage.fromData(imgdata)
+        # Load image
+        imgdata = open(imgpath, 'rb').read()
+        image = QImage.fromData(imgdata)
 
-    # convert image to 32-bit ARGB (adds an alpha
-    # channel ie transparency factor)
-    image.convertToFormat(QImage.Format.Format_ARGB32)
+        # convert image to 32-bit ARGB (adds an alpha
+        # channel ie transparency factor)
+        image.convertToFormat(QImage.Format.Format_ARGB32)
 
-    # crop image to a square
-    imgsize = min(image.width(), image.height())
-    rect = QRect(
-        int((image.width() - imgsize) / 2),
-        int((image.height() - imgsize) / 2),
-        imgsize,
-        imgsize,
-    )
-    image = image.copy(rect)
+        # crop image to a square
+        imgsize = min(image.width(), image.height())
+        rect = QRect(
+            int((image.width() - imgsize) / 2),
+            int((image.height() - imgsize) / 2),
+            imgsize,
+            imgsize,
+        )
+        image = image.copy(rect)
 
-    # Omitted the rest of the original code because
-    # I think those are for scaling the image, so
-    # I probably don't need it since I am using it
-    # as icon.
+        # Create the output image with the same dimension
+        # and an alpha channel and make it completely transparent:
+        out_img = QImage(imgsize, imgsize, QImage.Format.Format_ARGB32)
+        out_img.fill(Qt.GlobalColor.transparent)
 
-    return QPixmap(image)
+        # Create a texture brush and paint a *rounded
+        # corners square with the original image onto
+        # the output image:
+        painter = QPainter(out_img)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+        # Paint black background
+        black_brush = QBrush(Qt.GlobalColor.black)
+        painter.setBrush(black_brush)
+        painter.drawRoundedRect(QRect(0, 0, imgsize, imgsize), 10, 10, Qt.SizeMode.RelativeSize)
+
+        # Paint the output image
+        brush = QBrush(image)
+        painter.setBrush(brush)
+
+        # Drawing rounded corner square [47]
+        # Note the image size may vary so need to use RelativeSize mode [48]
+        painter.drawRoundedRect(QRect(0, 0, imgsize, imgsize), 10, 10, Qt.SizeMode.RelativeSize)
+
+        # Close painter event
+        painter.end()
+
+        # Last part is omitted from the reference [47]
+
+        return QPixmap(out_img)
 

@@ -1,4 +1,7 @@
-from PyQt6.QtCore import pyqtSignal, QObject
+import os.path
+
+from PyQt6.QtCore import pyqtSignal, QObject, QRect, Qt
+from PyQt6.QtGui import QImage, QPainter, QBrush, QPixmap
 
 
 class AchievementInfo(QObject):
@@ -6,6 +9,7 @@ class AchievementInfo(QObject):
 
     def __init__(self, image="images/trophy.png", title="", summary="", description="", progress=0):
         super().__init__()
+
         self._image = image
         self._title = title
         self._summary = summary
@@ -37,7 +41,7 @@ class AchievementInfo(QObject):
         self._summary = new_summary
         self._description = new_description
 
-    def setImage(self, new_image: str):
+    def setImage(self, new_image):
         self._image = new_image
         self.changed.emit()     # emit changed signal
 
@@ -56,3 +60,5 @@ class AchievementInfo(QObject):
     def setProgress(self, value: int):
         self._progress = value
         self.changed.emit()     # emit changed signal
+
+

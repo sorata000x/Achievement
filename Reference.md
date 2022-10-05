@@ -1,5 +1,11 @@
 
 
+[48] QPainter Class | Qt GUI 6.4.0 |
+https://doc.qt.io/qt-6/qpainter.html#drawRoundedRect
+
+[47] Thread: Rouding corners of a QPixmap - Qt Centre Forum | 
+https://www.qtcentre.org/threads/45944-Rouding-corners-of-a-QPixmap
+
 [46] PyQt5 – How to get cropped square image from rectangular image ? - StackOverflow |
 https://www.geeksforgeeks.org/pyqt5-how-to-get-cropped-square-image-from-rectangular-image/
 

@@ -32,7 +32,16 @@ class InProgressAchievementInfoPage(QWidget):
         self.background.resize(self.size())
         # --- Back Button
         self.back_button = QPushButton("< Back", self)
-        self.back_button.setObjectName("back_button")
+        self.back_button.setStyleSheet("""
+            QPushButton {
+                background-color: transparent;
+                border: none;
+                color: #437ccc;
+            }
+            QPushButton::hover {
+                color: #7aa6e6;
+            }
+        """)
         self.back_button.resize(50, 20)
         self.back_button.move(3, 3)
         self.back_button.clicked.connect(self.hide)
@@ -52,8 +61,9 @@ class InProgressAchievementInfoPage(QWidget):
         self.delete_button.resize(30, 30)
         self.delete_button.move(200, 10)
         # --- Info
+        # ------ Page title
         self.page_title = QLabel(self)
-        self.page_title.setStyleSheet("""font-size: 14pt;""")
+        self.page_title.setStyleSheet("""color: #adb1b8; font-size: 14pt;""")
         self.page_title.setText("Achievement Info")
         self.page_title.move(62, 6)
         # ------ Icon

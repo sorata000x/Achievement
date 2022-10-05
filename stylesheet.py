@@ -22,11 +22,7 @@ StyleSheet = """
         width: 36px;
         border-radius: 2px;
     }
-    QPushButton#back_button {
-        border: 1px solid black;
-        height: 36px;
-        width: 36px;
-    }
+
     QScrollArea {
         background-color: #34373b;
         border: 0;

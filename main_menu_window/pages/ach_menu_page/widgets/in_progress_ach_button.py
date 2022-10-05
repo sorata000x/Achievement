@@ -18,17 +18,21 @@ class InProgressAchievementButton(QPushButton):
             }
         """)
         # Element
+        # --- Progress
+        self.progress_bar = self.ProgressBar(self)
+        self.progress_bar.valueChanged.connect(self.checkStatus)  # check if achievement completed
         # --- Icon
         self.icon = QToolButton(self)
         self.icon.setStyleSheet("""
             background-color: black;
             border: none;
+            border-radius: 3px;
         """)
         self.icon.setContentsMargins(0, 0, 0, 0)
         self.icon.resize(QSize(38, 38))
         self.icon.setIcon(QIcon(achievement_info.image()))
-        self.icon.setIconSize(QSize(34, 34))
-        self.icon.move(6, 7)
+        self.icon.setIconSize(QSize(38, 38))
+        self.icon.move(6, 6)
         self.icon.clicked.connect(self.clicked.emit)
         # --- Title
         self._title = QLabel(achievement_info.title(), self)
@@ -37,7 +41,7 @@ class InProgressAchievementButton(QPushButton):
             color: white;
             font-size: 16pt;
         """)
-        self._title.move(48, 8)
+        self._title.move(52, 8)
         # --- Summary
         self._summary = QLabel(achievement_info.summary(), self)
         self._summary.setStyleSheet("""
@@ -45,12 +49,9 @@ class InProgressAchievementButton(QPushButton):
             color: white;
             font-size: 12pt;
         """)
-        self._summary.move(48, 28)
+        self._summary.move(53, 28)
         # --- Description
         self._description = achievement_info.description()
-        # --- Progress
-        self.progress_bar = self.ProgressBar(self)
-        self.progress_bar.valueChanged.connect(self.checkStatus)  # check if achievement completed
         # --- Complete Button
         self.complete_button = QToolButton(self)
         self.complete_button.setIcon(QIcon("images/checkmark.png"))
