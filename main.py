@@ -7,7 +7,7 @@
 """
 
 import sys
-from app import Application
+from RPGOverlay.app import Application
 
 
 def main():
