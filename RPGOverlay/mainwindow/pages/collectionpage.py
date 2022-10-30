@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QScrollArea, QPushButton, QGridLayout
 
-from RPGOverlay.config import *
+from config import *
 from RPGOverlay.functions import getFont
 from ...components.hline import QHLine
 from ...components.achievementbutton import AchievementCollectionButton

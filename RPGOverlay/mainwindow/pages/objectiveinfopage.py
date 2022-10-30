@@ -3,7 +3,7 @@ from PyQt6.QtGui import QIcon, QPainter, QMouseEvent
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QSlider, QPushButton, QStyleOption, QStyle, \
     QLineEdit, QTextEdit
 
-from RPGOverlay.config import *
+from config import *
 from ...components.deleteconfirmbox import DeleteConfirmBox
 from RPGOverlay.data.objectiveinfo import AchievementInfo
 

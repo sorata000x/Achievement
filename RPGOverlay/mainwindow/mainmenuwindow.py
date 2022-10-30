@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QToolButton, QLabel
 
 from ..components.menubutton import MenuButtonWidget
-from RPGOverlay.config import *
+from config import *
 from RPGOverlay.functions import getFont
 from RPGOverlay.mainwindow.pages.objectivemenupage import AchievementMenuPage
 from ..components.hline import QHLine

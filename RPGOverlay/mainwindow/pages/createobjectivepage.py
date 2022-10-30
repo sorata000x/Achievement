@@ -2,7 +2,7 @@ from PyQt6.QtCore import QSize, QRect, Qt
 from PyQt6.QtGui import QIcon, QFontMetricsF, QImage, QPainter, QBrush, QPixmap
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QLineEdit, QPlainTextEdit, QPushButton, QFileDialog
 
-from RPGOverlay.config import *
+from config import *
 from RPGOverlay.data.objectiveinfo import AchievementInfo
 
 
@@ -178,13 +178,15 @@ class CreateAchievementPage(QWidget):
         self.image_upload_button.setIconSize(QSize(60, 60))
 
     @staticmethod
-    def mask_image(imgpath):
+    def mask_image(img):
         """
         Masking image to square. [46]
         return: pixmap of the squared image.
         """
 
         # Load image
+        print('@@@@@@@@'+BASEDIR)
+        imgpath = os.path.join(BASEDIR, img)
         imgdata = open(imgpath, 'rb').read()
         image = QImage.fromData(imgdata)
 

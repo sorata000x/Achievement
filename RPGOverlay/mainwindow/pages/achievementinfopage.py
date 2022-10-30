@@ -2,7 +2,7 @@ from PyQt6.QtCore import QPropertyAnimation, QEasingCurve, QSize, QPoint, pyqtSi
 from PyQt6.QtGui import QIcon, QPainter
 from PyQt6.QtWidgets import QWidget, QToolButton, QLabel, QPlainTextEdit, QPushButton, QStyleOption, QStyle
 
-from RPGOverlay.config import *
+from config import *
 from ...components.deleteconfirmbox import DeleteConfirmBox
 
 

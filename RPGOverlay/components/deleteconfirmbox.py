@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QPlainTextEdit, QPushButton
 
-from RPGOverlay.config import *
+from config import *
 
 
 class DeleteConfirmBox(QWidget):

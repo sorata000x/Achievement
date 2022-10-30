@@ -1,11 +1,12 @@
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QSystemTrayIcon
-
+from config import *
 
 class SystemTrayIcon(QSystemTrayIcon):
     def __init__(self):
         super().__init__()
-        self.setIcon(QIcon("images/icon.jpg"))
+        iconpath = os.path.join(BASEDIR, 'images/icon.jpg')
+        self.setIcon(QIcon(iconpath))
         self.setVisible(True)
 
     def toggle_window(self, window):

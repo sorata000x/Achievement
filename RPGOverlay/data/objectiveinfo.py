@@ -2,12 +2,12 @@ import os.path
 
 from PyQt6.QtCore import pyqtSignal, QObject, QRect, Qt
 from PyQt6.QtGui import QImage, QPainter, QBrush, QPixmap
-
+from config import *
 
 class AchievementInfo(QObject):
     changed = pyqtSignal()
 
-    def __init__(self, image="images/trophy.png", title="", summary="", description="", progress=0):
+    def __init__(self, image=DEFAULT_IMAGE, title="", summary="", description="", progress=0):
         super().__init__()
 
         self._image = image

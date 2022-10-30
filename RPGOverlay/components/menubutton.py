@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QPushButton, QLabel, QGraphicsColorizeEffect, QToolB
 
 from RPGOverlay.components.toggle import ToggleWidget
 from RPGOverlay.functions import *
+from config import *
 
 class MenuButtonWidget(QPushButton):
     def __init__(self, title="", parent=None, has_toggle=False):
@@ -33,7 +34,8 @@ class MenuButtonWidget(QPushButton):
         # --- Icon
         self.icon = QToolButton(self)
         self.icon.setStyleSheet("""background-color: transparent; border: none;""")
-        self.icon.setIcon(QIcon("images/trophy.png"))
+        iconpath = os.path.join(BASEDIR, "images/trophy.png")
+        self.icon.setIcon(QIcon(iconpath))
         self.icon.setIconSize(QSize(34, 34))
         self.icon.move(6, int(self.height()/2-18))
         self.icon.clicked.connect(self.clicked.emit)
