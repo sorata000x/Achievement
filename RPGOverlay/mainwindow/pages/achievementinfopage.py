@@ -58,10 +58,11 @@ class AchievementInfoPage(QWidget):
         self.delete_button.move(200, 10)
         # --- Icon
         self.icon = QToolButton(self)
+        self.icon.setStyleSheet("""background-color: transparent;""")
         self.icon.setIcon(QIcon("images/trophy.png"))
         self.icon.setIconSize(QSize(60, 60))
         self.icon.resize(60, 60)
-        self.icon.move(10, 50)
+        self.icon.move(10, 42)
         # --- Title
         # ------ label
         self.title_label = QLabel("TITLE", self)
@@ -69,7 +70,7 @@ class AchievementInfoPage(QWidget):
         self.title_label.move(10, 124)
         # ------ text
         self.title_text = QLabel(self)
-        self.title_text.move(14, 144)
+        self.title_text.move(10, 144)
         # --- Summary
         # ------ label
         self.summary_label = QLabel("SUMMARY", self)
@@ -77,7 +78,7 @@ class AchievementInfoPage(QWidget):
         self.summary_label.move(10, 174)
         # ------ text
         self.summary_text = QLabel(self)
-        self.summary_text.move(14, 194)
+        self.summary_text.move(10, 194)
         # --- Description
         # ------ label
         self.description_label = QLabel("DESCRIPTION", self)
@@ -106,6 +107,8 @@ class AchievementInfoPage(QWidget):
         self.deletion_confirm_box.delete_button.clicked.connect(self.deleted.emit)
 
     def setInfo(self, achievement_info):
+        # Set image
+        self.icon.setIcon(QIcon(achievement_info.image()))
         # Set title
         self.title_text.setText(achievement_info.title())
         self.title_text.adjustSize()

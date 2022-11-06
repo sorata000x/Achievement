@@ -40,11 +40,12 @@ class AchievementCollectionPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Achievement Collection Label
         self.page_title = QLabel("Collection", self)
-        self.page_title.setStyleSheet("""font-size: 26pt; color: white;""")
+        self.page_title.setStyleSheet("""font-size: 26pt; color: #dbdbdb;""")
         self.page_title.setFont(getFont("roboto/Roboto-Thin.ttf"))
         self.page_title.move(64, 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
+        self.h_line.setStyleSheet("""border: 1px solid #dbdbdb;""")
         self.h_line.resize(self.width(), 1)
         self.h_line.move(0, 62)
         # Buttons
@@ -63,7 +64,6 @@ class AchievementCollectionPage(QWidget):
         self.achievement_container = QWidget()
         self.achievement_container.setObjectName("panel")
         self.achievement_container.setFixedWidth(self.scroll_area.width()-10)
-        #self.achievement_container.move(0, 50)
         self.scroll_area.setWidget(self.achievement_container)
         # --- Outer achievement collection buttons layout
         self.achievement_container_layout = QGridLayout()

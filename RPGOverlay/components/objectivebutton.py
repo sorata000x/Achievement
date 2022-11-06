@@ -53,11 +53,7 @@ class InProgressAchievementButton(QPushButton):
         # --- Description
         self._description = achievement_info.description()
         # --- Complete Button
-        self.complete_button = QToolButton(self)
-        self.complete_button.setIcon(QIcon("images/checkmark.png"))
-        self.complete_button.resize(30, 30)
-        #   position is set in the resize event
-        self.complete_button.hide()
+        self.complete_button = CompleteButton(self)
         #   position is set in the resize event
         # Achievement Data
         self.achievement_info = achievement_info
@@ -100,7 +96,7 @@ class InProgressAchievementButton(QPushButton):
 
     def resizeEvent(self, event):
         self.complete_button.move(
-            int(self.width() - self.complete_button.width() - 17),
+            int(self.width() - self.complete_button.width() - 8),
             int(self.height() / 2 - self.complete_button.height() / 2)
         )
         self.progress_bar.resize(self.width(), self.height())
@@ -137,3 +133,25 @@ class InProgressAchievementButton(QPushButton):
             self.move(0, 0)
             self.setMinimum(0)
             self.setMaximum(10)
+
+class CompleteButton(QToolButton):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.resize(36, 36)
+        self.setStyleSheet("""
+        QToolButton {
+            background-color: #e2e2e2; 
+            border-radius: 18px; 
+        }
+        QToolButton::hover {
+            background-color: white; 
+            border-radius: 18px; 
+        }
+        QToolButton::pressed {
+            background-color: #c2c2c2; 
+            border-radius: 18px; 
+        }    
+        """)
+        self.setIcon(QIcon("images/complete.png"))
+        self.setIconSize(QSize(36, 36))
+        self.hide()

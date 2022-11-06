@@ -8,13 +8,14 @@ class DeleteConfirmBox(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         # Config
-        self.resize(WINDOW_WIDTH, 100)
+        self.resize(WINDOW_WIDTH-20, 90)
         # Element
         # --- Background
         self.background = QWidget(self)
         self.background.resize(self.size())
         self.background.setStyleSheet("""
             background-color: rgba(0, 0, 0, 235);
+            border-radius: 5px;
         """)
         # --- Message
         self.message = QPlainTextEdit(self)
@@ -24,7 +25,8 @@ class DeleteConfirmBox(QWidget):
             color: white; 
             font-size: 14pt;
         """)
-        self.message.move(10, 14)
+        self.message.move(6, 10)
+        self.message.setFixedWidth(self.width()-10)
         self.message.setDisabled(True)
         # --- Cancel Button
         self.cancel_button = QPushButton(self)
@@ -37,7 +39,7 @@ class DeleteConfirmBox(QWidget):
         """)
         self.cancel_button.clicked.connect(self.hide)
         self.cancel_button.resize(60, 20)
-        self.cancel_button.move(130, 70)
+        self.cancel_button.move(90, 60)
         # --- Delete Button
         self.delete_button = QPushButton(self)
         self.delete_button.setText("Delete")
@@ -48,4 +50,4 @@ class DeleteConfirmBox(QWidget):
         """)
         self.delete_button.clicked.connect(self.hide)
         self.delete_button.resize(50, 20)
-        self.delete_button.move(200, 70)
+        self.delete_button.move(160, 60)

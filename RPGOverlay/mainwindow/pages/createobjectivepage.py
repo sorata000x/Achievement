@@ -178,15 +178,13 @@ class CreateAchievementPage(QWidget):
         self.image_upload_button.setIconSize(QSize(60, 60))
 
     @staticmethod
-    def mask_image(img):
+    def mask_image(imgpath):
         """
         Masking image to square. [46]
         return: pixmap of the squared image.
         """
 
         # Load image
-        print('@@@@@@@@'+BASEDIR)
-        imgpath = os.path.join(BASEDIR, img)
         imgdata = open(imgpath, 'rb').read()
         image = QImage.fromData(imgdata)
 
@@ -234,4 +232,3 @@ class CreateAchievementPage(QWidget):
         # Last part is omitted from the reference [47]
 
         return QPixmap(out_img)
-

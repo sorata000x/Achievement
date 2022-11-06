@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f46db52-1aa7-4d1d-95db-adfe6842c389" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/RPGOverlay/components/scrollarea.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGOverlay/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGOverlay/components/deleteconfirmbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/components/deleteconfirmbox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RPGOverlay/components/systemtrayicon.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/components/systemtrayicon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RPGOverlay/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGOverlay/components/menubutton.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/components/menubutton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGOverlay/components/objectivebutton.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/components/objectivebutton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGOverlay/data/objectiveinfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/data/objectiveinfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGOverlay/mainwindow/mainmenuwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/mainwindow/mainmenuwindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGOverlay/mainwindow/pages/achievementinfopage.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/mainwindow/pages/achievementinfopage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RPGOverlay/mainwindow/pages/collectionpage.py" beforeDir="false" afterPath="$PROJECT_DIR$/RPGOverlay/mainwindow/pages/collectionpage.py" afterDir="false" />
@@ -59,10 +62,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/RPGOverlay" />
       <recent name="$PROJECT_DIR$/RPGOverlay/data" />
       <recent name="$PROJECT_DIR$/RPGOverlay/mainwindow/pages" />
       <recent name="$PROJECT_DIR$/RPGOverlay/mainwindow/" />
-      <recent name="$PROJECT_DIR$/RPGOverlay/components" />
     </key>
   </component>
   <component name="RunManager">

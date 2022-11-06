@@ -11,15 +11,16 @@ from ...components.objectivebutton import InProgressAchievementButton
 from ...components.createbutton import CreateNewButtonWidget
 from ...components.hline import QHLine
 from ...components.menubutton import MenuButtonWidget
-
+from ...components.scrollarea import ScrollArea
 
 class AchievementMenuPage(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, settings, parent=None):
         super().__init__(parent)
         # Config
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         # Properties
-        self.in_progress_achievement_buttons = []   # list of available achievement buttons
+        self.in_progress_achievement_buttons = settings.value(      # list of available achievement buttons
+            'in_progress_achievement_buttons', [], InProgressAchievementButton)
         self.current_achievement_button = InProgressAchievementButton()     # current button with the info page
         # Elements
         # --- Background
@@ -43,11 +44,12 @@ class AchievementMenuPage(QWidget):
         self.back_button.clicked.connect(self.hide)
         # --- Achievement Label
         self.achievement_label = QLabel("Achievement", self)
-        self.achievement_label.setStyleSheet("""font-size: 26pt; color: white;""")
+        self.achievement_label.setStyleSheet("""font-size: 26pt; color: #dbdbdb;""")
         self.achievement_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
         self.achievement_label.move(int(self.width()/2-76), 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
+        self.h_line.setStyleSheet("""border: 1px solid #dbdbdb;""")
         self.h_line.resize(self.width(), 1)
         self.h_line.move(0, 62)
         # ------ Achievement Collection Button
@@ -61,8 +63,8 @@ class AchievementMenuPage(QWidget):
         self.ab_scroll_area_container.resize(self.width(), self.height()-150)
         self.ab_scroll_area_container.move(0, 118)
         # ------ Scroll Area, to contain buttons
-        self.ab_scroll_area = QScrollArea(self.ab_scroll_area_container)
-        self.ab_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.ab_scroll_area = ScrollArea(self.ab_scroll_area_container)
+        #self.ab_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.ab_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.ab_scroll_area.setWidgetResizable(True)
         self.ab_scroll_area.resize(self.width(), self.ab_scroll_area_container.height())
@@ -70,7 +72,12 @@ class AchievementMenuPage(QWidget):
         self.ab_scroll_area.setContentsMargins(0, 0, 0, 0)
         # --------- Widget to contain created achievement buttons layout
         self.cab_widget = QWidget()
-        self.cab_widget.setFixedWidth(self.ab_scroll_area.width()-16)
+        self.cab_widget.setFixedWidth(self.ab_scroll_area.width())
+        # ------------ adjust size respond to scroll bar
+        self.ab_scroll_area.verticalScrollBar().showed.connect(
+            lambda: self.cab_widget.setFixedWidth(self.ab_scroll_area.width()-16))
+        self.ab_scroll_area.verticalScrollBar().hided.connect(
+            lambda: self.cab_widget.setFixedWidth(self.ab_scroll_area.width()))
         self.cab_widget.setObjectName("panel")
         self.ab_scroll_area.setWidget(self.cab_widget)
         # --------- Layout
@@ -99,10 +106,15 @@ class AchievementMenuPage(QWidget):
         self.ach_collection_page = AchievementCollectionPage(self)
         self.ach_collection_page.hide()
         self.achievement_collection_button.clicked.connect(self.ach_collection_page.show)
-
-        # DEBUG
-        if debug:
-            self.create_new_achievement(AchievementInfo())
+        # Settings
+        """
+        self.settings = settings
+        if self.settings.contains(f'{self.__class__.__name__}-cab_layout'):
+            self.cab_layout = self.settings.value(f'{self.__class__.__name__}-cab_layout')
+        if self.settings.contains(f'{self.__class__.__name__}-in_progress_achievement_buttons'):
+            self.in_progress_achievement_buttons = self.settings.value(
+                f'{self.__class__.__name__}-in_progress_achievement_buttons')
+        """
 
     # Page Function
 
@@ -126,6 +138,10 @@ class AchievementMenuPage(QWidget):
         self.in_progress_achievement_buttons.remove(self.current_achievement_button)
         # Close the page
         self.in_progress_achievement_info_page.hide()
+        # Record change
+        self.settings.setValue(f'{self.__class__.__name__}-cab_layout', self.cab_layout)
+        self.settings.setValue(
+            f'{self.__class__.__name__}-in_progress_achievement_buttons', self.in_progress_achievement_buttons)
 
     def create_new_achievement(self, achievement_info):
         # Create achievement button
@@ -159,3 +175,10 @@ class AchievementMenuPage(QWidget):
         self.cab_layout.insertWidget(last_index, new_achievement_button)
         self.create_new_page.clear()
         self.create_new_page.hide()
+
+        # Record change
+        """
+        self.settings.setValue(f'{self.__class__.__name__}-cab_layout', self.cab_layout)
+        self.settings.setValue(
+            f'{self.__class__.__name__}-in_progress_achievement_buttons', self.in_progress_achievement_buttons)
+        """

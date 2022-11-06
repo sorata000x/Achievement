@@ -3,13 +3,13 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QToolButton, QLab
 
 from ..components.menubutton import MenuButtonWidget
 from config import *
-from RPGOverlay.functions import getFont
-from RPGOverlay.mainwindow.pages.objectivemenupage import AchievementMenuPage
+from ..functions import getFont
+from .pages.objectivemenupage import AchievementMenuPage
 from ..components.hline import QHLine
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, app):
+    def __init__(self, app, settings):
         super().__init__()
         # Window Config
         self.setWindowFlags(self.windowFlags() | Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
@@ -22,12 +22,12 @@ class MainWindow(QMainWindow):
         self.background.setObjectName("panel")
         # --- Menu Label
         self.menu_label = QLabel("Menu", self)
-        self.menu_label.setStyleSheet("""font-size: 28pt; color: #cfcfcf;""")
+        self.menu_label.setStyleSheet("""font-size: 28pt; color: #dbdbdb;""")
         self.menu_label.setFont(getFont("roboto/Roboto-Thin.ttf"))
         self.menu_label.move(82, 30)
         # --- Horizontal Line
         self.h_line = QHLine(self)
-        self.h_line.setStyleSheet("""border: 1px solid #cfcfcf;""")
+        self.h_line.setStyleSheet("""border: 1px solid #dbdbdb;""")
         self.h_line.resize(self.width(), 1)
         self.h_line.move(0, 62)
         # --- Tool Buttons
@@ -42,9 +42,9 @@ class MainWindow(QMainWindow):
         # ------ Tool buttons
         self.menu_buttons = {
             "achievement": MenuButtonWidget("ACHIEVEMENT"),
-            "skill_tree": MenuButtonWidget("SKILL TREE"),
-            "experience": MenuButtonWidget("EXPERIENCE", has_toggle=True),
-            "quest": MenuButtonWidget("QUEST"),
+            "skill_tree": MenuButtonWidget("?????"),
+            "experience": MenuButtonWidget("?????", has_toggle=True),
+            "quest": MenuButtonWidget("?????"),
             "quit": MenuButtonWidget("QUIT"),  # DEBUG
         }
         for name, widget in self.menu_buttons.items():
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
         self.user_button.move(204, self.height()-34)
         # Pages
         # --- Achievement Menu Page
-        self.achievement_menu = AchievementMenuPage(self)
+        self.achievement_menu = AchievementMenuPage(settings, self)
         self.achievement_menu.hide()
         self.menu_buttons["achievement"].clicked.connect(self.achievement_menu.show)
 

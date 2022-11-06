@@ -81,7 +81,7 @@ class InProgressAchievementInfoPage(QWidget):
         self.title_label.move(11, 116)
         # --------- Entry
         self.title_entry = TitleLineEdit(self)
-        self.title_entry.move(14, 136)
+        self.title_entry.move(11, 136)
         # ------------ add to entry group
         self.entry_group.addEntry(self.title_entry)
         # ------ Summary
@@ -91,7 +91,7 @@ class InProgressAchievementInfoPage(QWidget):
         self.summary_label.move(11, 166)
         # --------- Entry
         self.summary_entry = SummaryLineEdit(self)
-        self.summary_entry.move(14, 186)
+        self.summary_entry.move(11, 186)
         # ------------ add to entry group
         self.entry_group.addEntry(self.summary_entry)
         # ------ Progress
@@ -130,7 +130,7 @@ class InProgressAchievementInfoPage(QWidget):
         # --------- Entry
         self.description_entry = DescriptionTextEdit(self)
         self.description_entry.resize(226, 96)
-        self.description_entry.move(14, 286)
+        self.description_entry.move(11, 286)
         # ------------ add to entry group
         self.entry_group.addEntry(self.description_entry)
         # --- Deletion Confirm Message Box

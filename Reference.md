@@ -1,4 +1,5 @@
-
+[49] How to check if image file exists on given url in local machine using python - StackOverflow | 
+https://stackoverflow.com/questions/62547980/how-to-check-if-image-file-exists-on-given-url-in-local-machine-using-python
 
 [48] QPainter Class | Qt GUI 6.4.0 |
 https://doc.qt.io/qt-6/qpainter.html#drawRoundedRect

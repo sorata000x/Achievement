@@ -1,7 +1,4 @@
-import os.path
-
-from PyQt6.QtCore import pyqtSignal, QObject, QRect, Qt
-from PyQt6.QtGui import QImage, QPainter, QBrush, QPixmap
+from PyQt6.QtCore import pyqtSignal, QObject
 from config import *
 
 class AchievementInfo(QObject):
