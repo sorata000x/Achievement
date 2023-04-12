@@ -1,8 +1,13 @@
-# RPGOverlay
+# Achievement
+
+Achievement is a desktop application that helps you track the progress towards achieving your goals!
+
+<image src="achievement_demo.gif" width=500 />
 
 ## Feature
-
-## Idea
+ - Tray drop-down box that displays achievement options
+ - Options to create and record achievements
+ - Collection window that displays completed goals
 
 ## To Do
  - Draw a complete icon for the achievement button
@@ -21,7 +26,3 @@
  - input error detection
  - test the program well, make sure things work well as I intended and pay
    attention to the GUI display.
-
-(documentation)
-
-- record the features pls
