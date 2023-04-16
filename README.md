@@ -2,7 +2,7 @@
 
 Achievement is a desktop application that helps you track the progress towards achieving your goals!
 
-<image src="achievement_demo.gif" width=500 />
+<image src="achievement_demo.gif" alt="achievement_edmo.gif" width=500 />
 
 ## Feature
  - Tray drop-down box that displays achievement options
